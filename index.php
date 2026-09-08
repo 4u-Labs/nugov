@@ -206,7 +206,7 @@
     <div class="feed-controls">
       <div class="search-and-uf-wrap">
         <div class="search-input-wrap">
-          <span class="material-symbols-outlined">search</span>
+          <span class="material-symbols-outlined search-icon-badge">search</span>
           <input type="text" id="feed-search" class="feed-search-input" placeholder="Buscar por padaria, posto, hotel, cidade ou CNPJ...">
         </div>
         <div class="uf-select-wrap">
@@ -239,10 +239,20 @@
       </div>
     </div>
 
-    <!-- Transactions List Section -->
+    <!-- Top 10 Gastos Section Header with Instant Currency Mode Toggle -->
     <div class="transactions-header">
-      <h2>Extrato de Lançamentos</h2>
-      <span id="feed-count" class="feed-counter">Carregando dados públicos...</span>
+      <div class="header-title-wrap">
+        <h2>🔥 Top 10 Maiores Gastos</h2>
+        <span id="feed-count" class="feed-counter">10 maiores lançamentos</span>
+      </div>
+      <div class="feed-currency-toggle" id="feed-currency-toggle">
+        <button type="button" class="btn-feed-mode active" id="btn-feed-mode-nominal" data-mode="nominal" title="Exibir valores originais da época">
+          💵 Nominal
+        </button>
+        <button type="button" class="btn-feed-mode" id="btn-feed-mode-ipca" data-mode="ipca" title="Exibir valores com correção monetária pelo IPCA">
+          📈 Corrigido IPCA
+        </button>
+      </div>
     </div>
 
     <!-- Active Filter Indicator Banner -->

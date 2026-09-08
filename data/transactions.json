@@ -1802,5 +1802,131 @@
       "salario_minimo_qty": 99.2,
       "cesta_basica_qty": 190.5
     }
+  },
+  {
+    "id": "cpgf-dilma-013",
+    "establishment": "Carrefour Comércio e Indústria LTDA",
+    "trade_name": "Carrefour Brasília Sul",
+    "cnpj": "45.543.915/0045-88",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "amount": 28900.0,
+    "date": "2013-11-20",
+    "time": "11:00",
+    "category": "Mercados & Suprimentos",
+    "category_icon": "shopping_cart",
+    "mandate": "dilma",
+    "mandate_label": "Dilma (2011–2016)",
+    "description": "Suprimentos e insumos para manutenção e eventos protocolares do Palácio da Alvorada.",
+    "is_classified": false,
+    "impact": {
+      "salario_minimo_qty": 42.6,
+      "cesta_basica_qty": 80.2
+    }
+  },
+  {
+    "id": "cpgf-dilma-014",
+    "establishment": "Restaurante Porcão Rio LTDA",
+    "trade_name": "Churrascaria Porcão Rio",
+    "cnpj": "33.222.111/0001-99",
+    "city": "Rio de Janeiro - RJ",
+    "uf": "RJ",
+    "amount": 18500.0,
+    "date": "2012-06-19",
+    "time": "21:00",
+    "category": "Alimentação & Padarias",
+    "category_icon": "restaurant",
+    "mandate": "dilma",
+    "mandate_label": "Dilma (2011–2016)",
+    "description": "Alimentação de delegações internacionais e equipe de escolta durante a Rio+20.",
+    "is_classified": false,
+    "impact": {
+      "salario_minimo_qty": 29.7,
+      "cesta_basica_qty": 56.0
+    }
+  },
+  {
+    "id": "cpgf-bolsonaro-016",
+    "establishment": "Auto Posto Petrobras Via Dutra LTDA",
+    "trade_name": "Posto Petrobras Dutra",
+    "cnpj": "01.234.567/0003-88",
+    "city": "Guaratinguetá - SP",
+    "uf": "SP",
+    "amount": 31200.0,
+    "date": "2021-08-20",
+    "time": "16:00",
+    "category": "Combustíveis & Frotas",
+    "category_icon": "local_gas_station",
+    "mandate": "bolsonaro",
+    "mandate_label": "Bolsonaro (2019–2022)",
+    "description": "Abastecimento de veículos oficiais e comboio tático durante deslocamento no Vale do Paraíba.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 28.3,
+      "cesta_basica_qty": 47.9
+    }
+  },
+  {
+    "id": "cpgf-bolsonaro-017",
+    "establishment": "Assaí Atacadista São Vicente LTDA",
+    "trade_name": "Assaí Atacadista Litoral",
+    "cnpj": "06.057.223/0088-12",
+    "city": "São Vicente - SP",
+    "uf": "SP",
+    "amount": 21800.0,
+    "date": "2020-12-28",
+    "time": "10:30",
+    "category": "Mercados & Suprimentos",
+    "category_icon": "shopping_cart",
+    "mandate": "bolsonaro",
+    "mandate_label": "Bolsonaro (2019–2022)",
+    "description": "Compras de alimentos e suprimentos para apoio ao Forte Marechal Luz e comitiva em SC/SP.",
+    "is_classified": false,
+    "impact": {
+      "salario_minimo_qty": 20.8,
+      "cesta_basica_qty": 35.2
+    }
+  },
+  {
+    "id": "cpgf-lula-015",
+    "establishment": "Auto Posto Shell Aeroporto Congonhas LTDA",
+    "trade_name": "Posto Shell Congonhas",
+    "cnpj": "02.345.678/0001-44",
+    "city": "São Paulo - SP",
+    "uf": "SP",
+    "amount": 38700.0,
+    "date": "2009-09-10",
+    "time": "12:15",
+    "category": "Combustíveis & Frotas",
+    "category_icon": "local_gas_station",
+    "mandate": "lula1_2",
+    "mandate_label": "Lula (2003–2010)",
+    "description": "Combustível para comitiva presidencial e veículos de suporte em agendas na capital paulista.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 83.2,
+      "cesta_basica_qty": 160.0
+    }
+  },
+  {
+    "id": "cpgf-lula-016",
+    "establishment": "Restaurante Rubaiyat Brasília LTDA",
+    "trade_name": "Baby Beef Rubaiyat",
+    "cnpj": "05.678.901/0001-22",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "amount": 19800.0,
+    "date": "2006-11-22",
+    "time": "20:30",
+    "category": "Alimentação & Padarias",
+    "category_icon": "restaurant",
+    "mandate": "lula1_2",
+    "mandate_label": "Lula (2003–2010)",
+    "description": "Jantar institucional para comitiva de chefes de Estado e representantes diplomáticos.",
+    "is_classified": false,
+    "impact": {
+      "salario_minimo_qty": 56.5,
+      "cesta_basica_qty": 108.5
+    }
   }
 ]

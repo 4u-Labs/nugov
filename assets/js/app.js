@@ -436,26 +436,54 @@ function setupEventListeners() {
     });
   });
 
-  // Currency Mode Switcher (Nominal vs IPCA)
-  const btnNominal = document.getElementById('btn-mode-nominal');
-  const btnIpca = document.getElementById('btn-mode-ipca');
-  const modeHint = document.getElementById('mode-hint-text');
+  // Helper to switch currency mode and synchronize all toggles
+  function setCurrencyMode(mode) {
+    currentCurrencyMode = mode;
+    const isIpca = mode === 'ipca';
 
-  btnNominal?.addEventListener('click', () => {
-    btnNominal.classList.add('active');
-    btnIpca?.classList.remove('active');
-    currentCurrencyMode = 'nominal';
-    if (modeHint) modeHint.textContent = 'Exibindo valores históricos nominais registrados na data de cada despesa.';
-    renderApp();
-  });
+    // Main Card Toggle
+    const btnNominal = document.getElementById('btn-mode-nominal');
+    const btnIpca = document.getElementById('btn-mode-ipca');
+    const modeHint = document.getElementById('mode-hint-text');
 
-  btnIpca?.addEventListener('click', () => {
-    btnIpca.classList.add('active');
-    btnNominal?.classList.remove('active');
-    currentCurrencyMode = 'ipca';
-    if (modeHint) modeHint.textContent = 'Valores corrigidos pela inflação oficial (IPCA acumulado até 2026) para permitir comparações justas de poder de compra.';
+    if (btnNominal && btnIpca) {
+      if (isIpca) {
+        btnIpca.classList.add('active');
+        btnNominal.classList.remove('active');
+      } else {
+        btnNominal.classList.add('active');
+        btnIpca.classList.remove('active');
+      }
+    }
+
+    // Feed Section Toggle
+    const btnFeedNominal = document.getElementById('btn-feed-mode-nominal');
+    const btnFeedIpca = document.getElementById('btn-feed-mode-ipca');
+
+    if (btnFeedNominal && btnFeedIpca) {
+      if (isIpca) {
+        btnFeedIpca.classList.add('active');
+        btnFeedNominal.classList.remove('active');
+      } else {
+        btnFeedNominal.classList.add('active');
+        btnFeedIpca.classList.remove('active');
+      }
+    }
+
+    if (modeHint) {
+      modeHint.textContent = isIpca
+        ? 'Valores corrigidos pela inflação oficial (IPCA acumulado até 2026) para permitir comparações justas de poder de compra.'
+        : 'Exibindo valores históricos nominais registrados na data de cada despesa.';
+    }
+
     renderApp();
-  });
+  }
+
+  // Currency Mode Switchers (Nominal vs IPCA)
+  document.getElementById('btn-mode-nominal')?.addEventListener('click', () => setCurrencyMode('nominal'));
+  document.getElementById('btn-mode-ipca')?.addEventListener('click', () => setCurrencyMode('ipca'));
+  document.getElementById('btn-feed-mode-nominal')?.addEventListener('click', () => setCurrencyMode('nominal'));
+  document.getElementById('btn-feed-mode-ipca')?.addEventListener('click', () => setCurrencyMode('ipca'));
 
   // Search input
   const searchInput = document.getElementById('feed-search');
@@ -676,11 +704,24 @@ function renderTransactions() {
     return valB - valA;
   });
 
-  // Standardize: always display top 6 highest expenses
-  const top6Txs = filtered.slice(0, 6);
+  // Synchronize feed currency toggle buttons
+  const btnFeedNominal = document.getElementById('btn-feed-mode-nominal');
+  const btnFeedIpca = document.getElementById('btn-feed-mode-ipca');
+  if (btnFeedNominal && btnFeedIpca) {
+    if (isIpca) {
+      btnFeedIpca.classList.add('active');
+      btnFeedNominal.classList.remove('active');
+    } else {
+      btnFeedNominal.classList.add('active');
+      btnFeedIpca.classList.remove('active');
+    }
+  }
+
+  // Standardize: always display top 10 highest expenses
+  const top10Txs = filtered.slice(0, 10);
 
   if (countEl) {
-    countEl.textContent = `${top6Txs.length} maiores lançamentos exibidos`;
+    countEl.textContent = `${top10Txs.length} maiores lançamentos exibidos`;
   }
 
   // Active filter banner control
@@ -694,7 +735,7 @@ function renderTransactions() {
       if (currentCategory !== 'all') desc.push(`Categoria: "${currentCategory}"`);
       if (currentUF !== 'all') desc.push(`Estado: ${currentUF}`);
       if (searchQuery) desc.push(`Busca: "${searchQuery}"`);
-      filterText.innerHTML = `🔍 Filtrando por: <strong>${desc.join(' • ')}</strong> (${top6Txs.length} de ${filtered.length} lançamentos)`;
+      filterText.innerHTML = `🔍 Filtrando por: <strong>${desc.join(' • ')}</strong> (${top10Txs.length} de ${filtered.length} lançamentos)`;
     } else {
       filterBanner.style.display = 'none';
     }
@@ -711,7 +752,7 @@ function renderTransactions() {
     return;
   }
 
-  const txsCardsHtml = top6Txs.map(tx => {
+  const txsCardsHtml = top10Txs.map(tx => {
     const year = tx.date ? parseInt(tx.date.substring(0, 4)) : 2026;
     const factor = IPCA_FACTORS[year] || 1.0;
     const displayAmount = isIpca ? (tx.amount * factor) : tx.amount;
@@ -741,7 +782,7 @@ function renderTransactions() {
     `;
   }).join('');
 
-  // Grand Total of the mandate (not just sum of 6 items)
+  // Grand Total of the mandate (not just sum of 10 items)
   const stats = getMandateStats(currentMandate);
   const grandTotalVal = isIpca ? stats.ipca : stats.nominal;
   const grandTotalTxCount = stats.total_transactions ? Number(stats.total_transactions).toLocaleString('pt-BR') : '30.000+';

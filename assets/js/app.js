@@ -1820,15 +1820,15 @@ function generateAppGeneralStoryCard() {
     ctx.stroke();
 
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 32px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.font = 'bold 30px -apple-system, BlinkMacSystemFont, sans-serif';
     ctx.fillText('🔍 VEJA O EXTRATO COMPLETO DE CADA GASTO:', 140, 1330);
 
     ctx.fillStyle = '#fde047';
-    ctx.font = '900 52px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.font = '900 38px -apple-system, BlinkMacSystemFont, sans-serif';
     ctx.fillText('Hotéis VIP • Padarias • Frotas • Duelos', 140, 1405);
 
-    ctx.fillStyle = '#a855f7';
-    ctx.font = 'bold 36px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillStyle = '#c084fc';
+    ctx.font = 'bold 32px -apple-system, BlinkMacSystemFont, sans-serif';
     ctx.fillText('Acesse grátis: https://4u.ia.br/app/nugov/', 140, 1465);
 
     // Footer Verification Badge

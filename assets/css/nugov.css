@@ -264,6 +264,12 @@ body {
   margin-bottom: 20px;
 }
 
+.card-chip-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* Real EMV Chip Container & Image */
 .card-chip-wrap {
   width: 54px;
@@ -291,6 +297,13 @@ body {
   color: rgba(255, 255, 255, 0.8);
 }
 
+.card-badge-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
 .card-badge-tag {
   font-size: 11px;
   font-weight: 800;
@@ -302,6 +315,44 @@ body {
   border: 1.5px solid rgba(255, 255, 255, 0.28);
   color: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.card-limit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(253, 224, 71, 0.35);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+.card-limit-badge .limit-lbl {
+  color: #cbd5e1;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 9.5px;
+}
+
+.card-limit-badge .limit-val {
+  color: #fde047;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.card-limit-badge .limit-inf {
+  font-size: 12px;
+  font-weight: 900;
+  color: #fde047;
+  line-height: 1;
 }
 
 .card-balance-display {

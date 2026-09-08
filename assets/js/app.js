@@ -1072,19 +1072,32 @@ function generateStoryCard(tx) {
       ctx.fill();
     }
 
-    // Government badge top-right
+    // Government badge top-right: República Black
     ctx.fillStyle = 'rgba(255, 255, 255, 0.18)';
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.roundRect(610, 435, 320, 64, 16);
+    ctx.roundRect(570, 415, 360, 48, 12);
     ctx.fill();
     ctx.stroke();
 
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.font = 'bold 22px -apple-system, BlinkMacSystemFont, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(tx.mandate_label?.split(' ')[0].toUpperCase() || 'PRESIDÊNCIA', 770, 477);
+    ctx.fillText('REPÚBLICA BLACK', 750, 447);
+
+    // Limit badge: Limite Cartão: Ilimitado ∞
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+    ctx.strokeStyle = 'rgba(253, 224, 71, 0.5)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.roundRect(570, 473, 360, 44, 10);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#fde047';
+    ctx.font = 'bold 19px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('LIMITE CARTÃO: ILIMITADO ∞', 750, 502);
 
     // Big Amount Display
     ctx.textAlign = 'left';

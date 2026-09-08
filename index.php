@@ -95,13 +95,21 @@
       <div class="credit-card-3d-wrap">
         <div class="presidential-card">
           <div class="card-chip-band">
-            <div class="card-chip-wrap">
-              <img src="assets/img/chip.png?v=<?php echo filemtime('assets/img/chip.png'); ?>" alt="Chip de Cartão" class="card-chip-img">
+            <div class="card-chip-left">
+              <div class="card-chip-wrap">
+                <img src="assets/img/chip.png?v=<?php echo filemtime('assets/img/chip.png'); ?>" alt="Chip de Cartão" class="card-chip-img">
+              </div>
+              <div class="card-contactless">
+                <span class="material-symbols-outlined">contactless</span>
+              </div>
             </div>
-            <div class="card-contactless">
-              <span class="material-symbols-outlined">contactless</span>
+            <div class="card-badge-group">
+              <div id="card-badge-tag" class="card-badge-tag">REPÚBLICA BLACK</div>
+              <div class="card-limit-badge">
+                <span class="limit-lbl">Limite Cartão:</span>
+                <span class="limit-val">Ilimitado <span class="limit-inf">∞</span></span>
+              </div>
             </div>
-            <div id="card-badge-tag" class="card-badge-tag">REPÚBLICA BLACK</div>
           </div>
 
           <div class="card-balance-display">

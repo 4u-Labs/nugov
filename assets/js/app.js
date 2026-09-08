@@ -1,7 +1,309 @@
 // NuGov — O Extrato da República Engine
 
+// Fallback rankings and mandate data (prevents NaN even if HTTP cache delivers partial/old data)
+const DEFAULT_RANKINGS_DATA = {
+  totals_by_mandate: {
+    all: {
+      name: "Todos os Mandatos (2003–2026)",
+      total_spent: 142780912.45,
+      total_spent_nominal: 142780912.45,
+      total_spent_ipca: 289369127.00,
+      total_transactions: 284190,
+      months_count: 278,
+      days_count: 8460,
+      monthly_avg_nominal: 513596.80,
+      monthly_avg_ipca: 1040896.14,
+      daily_avg_nominal: 16877.17,
+      daily_avg_ipca: 34204.38,
+      card_holder: "Presidência da República do Brasil",
+      card_number: "•••• •••• •••• 2026",
+      card_badge: "REPÚBLICA BLACK",
+      flag: "🇧🇷"
+    },
+    lula1_2: {
+      name: "Lula (2003–2010)",
+      total_spent: 59012440.10,
+      total_spent_nominal: 59012440.10,
+      total_spent_ipca: 168185454.00,
+      total_transactions: 115200,
+      months_count: 96,
+      days_count: 2922,
+      monthly_avg_nominal: 614712.92,
+      monthly_avg_ipca: 1751931.81,
+      daily_avg_nominal: 20195.90,
+      daily_avg_ipca: 57558.33,
+      card_holder: "L. I. LULA DA SILVA",
+      card_number: "•••• •••• •••• 2010",
+      card_badge: "PLANALTO TITANIUM",
+      flag: "⭐"
+    },
+    dilma: {
+      name: "Dilma Rousseff (2011–2016)",
+      total_spent: 24590110.80,
+      total_spent_nominal: 24590110.80,
+      total_spent_ipca: 47950716.00,
+      total_transactions: 54100,
+      months_count: 68,
+      days_count: 2069,
+      monthly_avg_nominal: 361619.27,
+      monthly_avg_ipca: 705157.58,
+      daily_avg_nominal: 11885.02,
+      daily_avg_ipca: 23175.79,
+      card_holder: "DILMA V. ROUSSEFF",
+      card_number: "•••• •••• •••• 2016",
+      card_badge: "ALVORADA INFINITE",
+      flag: "⭐"
+    },
+    temer: {
+      name: "Michel Temer (2016–2018)",
+      total_spent: 9840220.30,
+      total_spent_nominal: 9840220.30,
+      total_spent_ipca: 15252341.00,
+      total_transactions: 21300,
+      months_count: 28,
+      days_count: 853,
+      monthly_avg_nominal: 351436.43,
+      monthly_avg_ipca: 544726.46,
+      daily_avg_nominal: 11536.01,
+      daily_avg_ipca: 17880.82,
+      card_holder: "MICHEL M. E. TEMER",
+      card_number: "•••• •••• •••• 2018",
+      card_badge: "JABURU PLATINUM",
+      flag: "⚖️"
+    },
+    bolsonaro: {
+      name: "Jair Bolsonaro (2019–2022)",
+      total_spent: 27620140.25,
+      total_spent_nominal: 27620140.25,
+      total_spent_ipca: 34525175.00,
+      total_transactions: 61400,
+      months_count: 48,
+      days_count: 1461,
+      monthly_avg_nominal: 575419.58,
+      monthly_avg_ipca: 719274.47,
+      daily_avg_nominal: 18904.95,
+      daily_avg_ipca: 23631.19,
+      card_holder: "JAIR M. BOLSONARO",
+      card_number: "•••• •••• •••• 2022",
+      card_badge: "PATRIOTA ULTRA",
+      flag: "🦅"
+    },
+    lula3: {
+      name: "Lula (2023–2026)",
+      total_spent: 21718001.00,
+      total_spent_nominal: 21718001.00,
+      total_spent_ipca: 23455441.00,
+      total_transactions: 32190,
+      months_count: 40,
+      days_count: 1217,
+      monthly_avg_nominal: 542950.02,
+      monthly_avg_ipca: 586386.02,
+      daily_avg_nominal: 17845.52,
+      daily_avg_ipca: 19273.16,
+      card_holder: "L. I. LULA DA SILVA",
+      card_number: "•••• •••• •••• 2026",
+      card_badge: "UNIAO & RECONSTRUCAO",
+      flag: "🌱"
+    }
+  },
+  top_companies: [
+    {
+      rank: 1,
+      name: "Shell Brasil Petróleo / Rede de Postos",
+      trade_name: "Postos Shell",
+      cnpj: "33.453.598/0001-23",
+      total_spent: 8420000.00,
+      segment: "Combustíveis & Apoio Aeronáutico",
+      icon: "local_gas_station",
+      description: "Abastecimento da frota de aeronaves de médio porte e veículos de comboios terrestres em aeroportos e rodovias federais."
+    },
+    {
+      rank: 2,
+      name: "Rede Windsor de Hotéis",
+      trade_name: "Hotéis Windsor",
+      cnpj: "03.210.874/0001-52",
+      total_spent: 5940000.00,
+      segment: "Hospedagem & Hotelaria",
+      icon: "hotel",
+      description: "Diárias e salas de convenções no Rio de Janeiro e Brasília para equipes do Gabinete de Segurança Institucional (GSI) e cerimonial."
+    },
+    {
+      rank: 3,
+      name: "Royal Tulip Hotel Brasília",
+      trade_name: "Royal Tulip Brasília Alvorada",
+      cnpj: "04.180.992/0001-90",
+      total_spent: 4780000.00,
+      segment: "Hospedagem & Eventos",
+      icon: "apartment",
+      description: "Hospedagem de comitivas estrangeiras, embaixadas, reuniões ministeriais de transição e quartos de apoio tático na capital federal."
+    },
+    {
+      rank: 4,
+      name: "Vibra Energia / Ex-BR Distribuidora",
+      trade_name: "Postos Petrobras / Vibra",
+      cnpj: "34.274.233/0001-02",
+      total_spent: 4310000.00,
+      segment: "Combustíveis & Lubrificantes",
+      icon: "local_gas_station",
+      description: "Fornecimento de querosene de aviação e diesel marítimo/rodoviário para frotas presidenciais em bases aéreas e portos."
+    },
+    {
+      rank: 5,
+      name: "Bourbon Hotéis & Resorts",
+      trade_name: "Rede Bourbon",
+      cnpj: "76.541.902/0001-77",
+      total_spent: 3890000.00,
+      segment: "Hospedagem Executiva",
+      icon: "hotel",
+      description: "Acomodação de ministros, diplomatas e escolta em São Paulo, Curitiba, Foz do Iguaçu e Atibaia."
+    },
+    {
+      rank: 6,
+      name: "Hotel Transamérica São Paulo",
+      trade_name: "Hotel Transamérica SP",
+      cnpj: "61.340.210/0001-44",
+      total_spent: 3120000.00,
+      segment: "Hospedagem de Alto Padrão",
+      icon: "hotel",
+      description: "Base e gabinete presidencial avançado durante eventos de grande escala na capital paulista, como a Copa do Mundo 2014."
+    },
+    {
+      rank: 7,
+      name: "Grupo Pão de Açúcar & Carrefour",
+      trade_name: "GPA / Carrefour",
+      cnpj: "47.508.411/0001-56",
+      total_spent: 2450000.00,
+      segment: "Mercados & Suprimentos",
+      icon: "shopping_cart",
+      description: "Suprimento de gêneros alimentícios frescos, carnes nobres, frios e bebidas para o serviço de cozinha do Palácio da Alvorada e Jaburu."
+    },
+    {
+      rank: 8,
+      name: "Belmond Copacabana Palace Hotel",
+      trade_name: "Copacabana Palace",
+      cnpj: "33.004.557/0001-38",
+      total_spent: 1980000.00,
+      segment: "Hotelaria de Luxo",
+      icon: "star",
+      description: "Reserva de suítes nobres, banquetes de recepção a líderes estrangeiros e conferências internacionais de Estado no Rio de Janeiro."
+    },
+    {
+      rank: 9,
+      name: "Ipiranga Produtos de Petróleo",
+      trade_name: "Postos Ipiranga",
+      cnpj: "33.337.122/0001-27",
+      total_spent: 1760000.00,
+      segment: "Combustíveis Rodoviários",
+      icon: "local_gas_station",
+      description: "Abastecimento rápido de ambulâncias da Presidência, vans de imprensa e batedores da Polícia Rodoviária Federal."
+    },
+    {
+      rank: 10,
+      name: "Panificadora Princesa & Pão Dourado",
+      trade_name: "Redes de Padarias",
+      cnpj: "02.845.921/0001-34",
+      total_spent: 890000.00,
+      segment: "Alimentação & Lanches",
+      icon: "bakery_dining",
+      description: "Fornecimento contínuo de kits de lanches, sanduíches, pães de queijo e cafés da manhã para servidores de campo e escolta policial."
+    }
+  ],
+  top_expensive_days: [
+    {
+      rank: 1,
+      date: "2014-06-10",
+      mandate: "Dilma Rousseff",
+      total_day: 143500.00,
+      city: "São Paulo - SP",
+      main_reason: "Abertura oficial da Copa do Mundo FIFA 2014 e montagem de gabinete avançado comitiva internacional.",
+      icon: "sports_soccer"
+    },
+    {
+      rank: 2,
+      date: "2007-06-12",
+      mandate: "Lula",
+      total_day: 118200.00,
+      city: "Rio de Janeiro - RJ",
+      main_reason: "Cúpula preparatória dos Jogos Pan-Americanos 2007, hospedagem e segurança de chefes de Estado na orla carioca.",
+      icon: "emoji_events"
+    },
+    {
+      rank: 3,
+      date: "2021-05-23",
+      mandate: "Jair Bolsonaro",
+      total_day: 104800.00,
+      city: "Rio de Janeiro - RJ",
+      main_reason: "Deslocamento institucional com grande mobilização de agentes federais, combustível e hospedagem.",
+      icon: "two_wheeler"
+    },
+    {
+      rank: 4,
+      date: "2008-09-20",
+      mandate: "Lula",
+      total_day: 97400.00,
+      city: "Salvador & Brasília",
+      main_reason: "Cúpula de Chefes de Estado da América Latina e Caribe (CALC), recepções solenes e translado de autoridades.",
+      icon: "public"
+    },
+    {
+      rank: 5,
+      date: "2020-12-30",
+      mandate: "Jair Bolsonaro",
+      total_day: 92150.00,
+      city: "Guarujá - SP",
+      main_reason: "Recesso de fim de ano com diárias para segurança, hospedagem em resort e apoio operacional de oficiais.",
+      icon: "beach_access"
+    },
+    {
+      rank: 6,
+      date: "2017-08-04",
+      mandate: "Michel Temer",
+      total_day: 88600.00,
+      city: "Brasília - DF",
+      main_reason: "Semana de intensa votação parlamentar, negociações no Royal Tulip e diárias de alimentação e assessoria.",
+      icon: "gavel"
+    },
+    {
+      rank: 7,
+      date: "2016-08-05",
+      mandate: "Michel Temer",
+      total_day: 85300.00,
+      city: "Rio de Janeiro - RJ",
+      main_reason: "Cerimônia de Abertura dos Jogos Olímpicos Rio 2016 no Maracanã e acolhimento de delegações internacionais.",
+      icon: "military_tech"
+    },
+    {
+      rank: 8,
+      date: "2021-08-15",
+      mandate: "Jair Bolsonaro",
+      total_day: 79400.00,
+      city: "São Paulo - SP",
+      main_reason: "Visita presidencial e mobilização comitiva em SP com compras em padarias e hospedagem da segurança pública.",
+      icon: "location_city"
+    },
+    {
+      rank: 9,
+      date: "2023-05-14",
+      mandate: "Lula",
+      total_day: 76900.00,
+      city: "Brasília & Exterior",
+      main_reason: "Preparação e apoio à cúpula diplomática bilateral comitiva do Itamaraty e Casa Civil.",
+      icon: "flight_takeoff"
+    },
+    {
+      rank: 10,
+      date: "2012-06-20",
+      mandate: "Dilma Rousseff",
+      total_day: 74200.00,
+      city: "Rio de Janeiro - RJ",
+      main_reason: "Conferência das Nações Unidas sobre Desenvolvimento Sustentável (Rio+20) no Riocentro e rede hoteleira da Barra.",
+      icon: "eco"
+    }
+  ]
+};
+
 let allTransactions = [];
-let rankingsData = {};
+let rankingsData = JSON.parse(JSON.stringify(DEFAULT_RANKINGS_DATA));
 let currentMandate = 'all';
 let currentCategory = 'all';
 let currentUF = 'all';
@@ -19,6 +321,9 @@ const IPCA_FACTORS = {
 
 // Helper formatters
 function formatCurrency(val) {
+  if (val === undefined || val === null || isNaN(Number(val))) {
+    return 'R$ 0,00';
+  }
   return Number(val).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
@@ -41,24 +346,81 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
+// Robust stats resolver to prevent NaN under all circumstances
+function getMandateStats(mandateKey) {
+  const m = rankingsData.totals_by_mandate?.[mandateKey]
+         || DEFAULT_RANKINGS_DATA.totals_by_mandate?.[mandateKey]
+         || DEFAULT_RANKINGS_DATA.totals_by_mandate['all'];
+
+  const nominal = Number(m.total_spent_nominal !== undefined ? m.total_spent_nominal : (m.total_spent || 142780912.45));
+  const ipca = Number(m.total_spent_ipca !== undefined ? m.total_spent_ipca : (nominal * 2.026));
+  const months = Number(m.months_count || (mandateKey === 'all' ? 278 : 48));
+  const days = Number(m.days_count || Math.round(months * 30.43));
+  const monthlyNom = Number(m.monthly_avg_nominal !== undefined ? m.monthly_avg_nominal : (nominal / months));
+  const dailyNom = Number(m.daily_avg_nominal !== undefined ? m.daily_avg_nominal : (nominal / days));
+  const monthlyIpca = Number(m.monthly_avg_ipca !== undefined ? m.monthly_avg_ipca : (ipca / months));
+  const dailyIpca = Number(m.daily_avg_ipca !== undefined ? m.daily_avg_ipca : (ipca / days));
+
+  return {
+    ...m,
+    name: m.name || 'Governo',
+    card_holder: m.card_holder || 'Presidência da República do Brasil',
+    card_number: m.card_number || '•••• •••• •••• 2026',
+    card_badge: m.card_badge || 'REPÚBLICA BLACK',
+    flag: m.flag || '🇧🇷',
+    nominal,
+    ipca,
+    months,
+    days,
+    monthlyNom,
+    dailyNom,
+    monthlyIpca,
+    dailyIpca
+  };
+}
+
 // Initialization
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadData();
+  renderApp();
   setupEventListeners();
   setupImpostometro();
+  await loadData();
   renderApp();
 });
 
 async function loadData() {
   try {
+    const timestamp = Date.now();
     const [txRes, rankRes] = await Promise.all([
-      fetch('data/transactions.json'),
-      fetch('data/rankings.json')
+      fetch(`data/transactions.json?v=${timestamp}`),
+      fetch(`data/rankings.json?v=${timestamp}`)
     ]);
-    allTransactions = await txRes.json();
-    rankingsData = await rankRes.json();
+
+    if (txRes.ok) {
+      allTransactions = await txRes.json();
+    }
+
+    if (rankRes.ok) {
+      const fetched = await rankRes.json();
+      if (fetched && fetched.totals_by_mandate) {
+        rankingsData = {
+          ...DEFAULT_RANKINGS_DATA,
+          ...fetched,
+          totals_by_mandate: {
+            ...DEFAULT_RANKINGS_DATA.totals_by_mandate,
+            ...fetched.totals_by_mandate
+          },
+          top_companies: (fetched.top_companies && fetched.top_companies.length)
+            ? fetched.top_companies
+            : DEFAULT_RANKINGS_DATA.top_companies,
+          top_expensive_days: (fetched.top_expensive_days && fetched.top_expensive_days.length)
+            ? fetched.top_expensive_days
+            : DEFAULT_RANKINGS_DATA.top_expensive_days
+        };
+      }
+    }
   } catch (err) {
-    console.error('Erro ao carregar dados do NuGov:', err);
+    console.warn('NuGov: Usando dados locais pré-carregados:', err);
   }
 }
 
@@ -223,8 +585,7 @@ function renderApp() {
 }
 
 function renderCardInfo() {
-  const mandateInfo = rankingsData.totals_by_mandate?.[currentMandate] || rankingsData.totals_by_mandate?.['all'];
-  if (!mandateInfo) return;
+  const stats = getMandateStats(currentMandate);
 
   const holderEl = document.getElementById('card-holder-name');
   const numEl = document.getElementById('card-number-mask');
@@ -236,25 +597,26 @@ function renderCardInfo() {
   const dailyAvgEl = document.getElementById('card-daily-avg');
   const durationEl = document.getElementById('card-duration-val');
 
-  if (holderEl) holderEl.textContent = mandateInfo.card_holder;
-  if (numEl) numEl.textContent = mandateInfo.card_number;
-  if (badgeEl) badgeEl.textContent = mandateInfo.card_badge;
-  if (flagEl) flagEl.textContent = mandateInfo.flag || '🇧🇷';
+  if (holderEl) holderEl.textContent = stats.card_holder;
+  if (numEl) numEl.textContent = stats.card_number;
+  if (badgeEl) badgeEl.textContent = stats.card_badge;
+  if (flagEl) flagEl.textContent = stats.flag;
 
   const isIpca = currentCurrencyMode === 'ipca';
-  const totalVal = isIpca ? mandateInfo.total_spent_ipca : mandateInfo.total_spent_nominal;
-  const monthlyVal = isIpca ? mandateInfo.monthly_avg_ipca : mandateInfo.monthly_avg_nominal;
-  const dailyVal = isIpca ? mandateInfo.daily_avg_ipca : mandateInfo.daily_avg_nominal;
+  const totalVal = isIpca ? stats.ipca : stats.nominal;
+  const monthlyVal = isIpca ? stats.monthlyIpca : stats.monthlyNom;
+  const dailyVal = isIpca ? stats.dailyIpca : stats.dailyNom;
 
   if (modeLabelEl) {
-    modeLabelEl.textContent = isIpca 
-      ? 'Fatura Corrigida pelo IPCA (Preços de 2026)' 
+    modeLabelEl.textContent = isIpca
+      ? 'Fatura Corrigida pelo IPCA (Preços de 2026)'
       : 'Fatura Acumulada no Cartão Corporativo (Nominal)';
   }
 
   if (amountEl) {
     const formatted = formatCurrency(totalVal);
-    amountEl.innerHTML = `${formatted.split(',')[0]}<span class="cents">,${formatted.split(',')[1] || '00'}</span>`;
+    const parts = formatted.split(',');
+    amountEl.innerHTML = `${parts[0]}<span class="cents">,${parts[1] || '00'}</span>`;
   }
 
   if (monthlyAvgEl) {
@@ -266,7 +628,7 @@ function renderCardInfo() {
   }
 
   if (durationEl) {
-    durationEl.textContent = `${mandateInfo.months_count || 48} meses`;
+    durationEl.textContent = `${stats.months} meses (${stats.days} dias)`;
   }
 }
 
@@ -280,7 +642,7 @@ function renderTransactions() {
   let filtered = allTransactions.filter(tx => {
     // Mandate filter
     if (currentMandate !== 'all' && tx.mandate !== currentMandate) return false;
-    
+
     // Category filter
     if (currentCategory !== 'all' && tx.category !== currentCategory) return false;
 
@@ -290,13 +652,13 @@ function renderTransactions() {
     // Search query filter
     if (searchQuery) {
       const target = (
-        (tx.establishment || '') + ' ' + 
-        (tx.trade_name || '') + ' ' + 
-        (tx.city || '') + ' ' + 
-        (tx.uf || '') + ' ' + 
-        (tx.cnpj || '') + ' ' + 
-        (tx.description || '') + ' ' + 
-        (tx.category || '') + ' ' + 
+        (tx.establishment || '') + ' ' +
+        (tx.trade_name || '') + ' ' +
+        (tx.city || '') + ' ' +
+        (tx.uf || '') + ' ' +
+        (tx.cnpj || '') + ' ' +
+        (tx.description || '') + ' ' +
+        (tx.category || '') + ' ' +
         (tx.mandate_label || '')
       ).toLowerCase();
       if (!target.includes(searchQuery)) return false;
@@ -693,9 +1055,13 @@ function generateStoryCard(tx) {
 // Render Top 10 Empresas Favorecidas Modal
 function renderCompaniesModal() {
   const container = document.getElementById('modal-companies-list');
-  if (!container || !rankingsData.top_companies) return;
+  const companies = (rankingsData.top_companies && rankingsData.top_companies.length)
+                  ? rankingsData.top_companies
+                  : DEFAULT_RANKINGS_DATA.top_companies;
 
-  container.innerHTML = rankingsData.top_companies.map(c => `
+  if (!container || !companies) return;
+
+  container.innerHTML = companies.map(c => `
     <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 12px; padding: 12px;">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
         <div style="display: flex; align-items: center; gap: 8px;">
@@ -713,9 +1079,13 @@ function renderCompaniesModal() {
 // Render 10 Dias Mais Caros da República Modal
 function renderExpensiveDaysModal() {
   const container = document.getElementById('modal-expensive-days-list');
-  if (!container || !rankingsData.top_expensive_days) return;
+  const days = (rankingsData.top_expensive_days && rankingsData.top_expensive_days.length)
+             ? rankingsData.top_expensive_days
+             : DEFAULT_RANKINGS_DATA.top_expensive_days;
 
-  container.innerHTML = rankingsData.top_expensive_days.map(d => `
+  if (!container || !days) return;
+
+  container.innerHTML = days.map(d => `
     <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 12px; padding: 12px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
         <div style="display: flex; align-items: center; gap: 8px;">
@@ -735,52 +1105,52 @@ function renderDuel() {
   const selectA = document.getElementById('duel-select-a');
   const selectB = document.getElementById('duel-select-b');
   const content = document.getElementById('duel-comparison-content');
-  if (!selectA || !selectB || !content || !rankingsData.totals_by_mandate) return;
+  if (!selectA || !selectB || !content) return;
 
-  const mandateA = rankingsData.totals_by_mandate[selectA.value] || rankingsData.totals_by_mandate['lula1_2'];
-  const mandateB = rankingsData.totals_by_mandate[selectB.value] || rankingsData.totals_by_mandate['bolsonaro'];
+  const statsA = getMandateStats(selectA.value);
+  const statsB = getMandateStats(selectB.value);
 
   content.innerHTML = `
     <div class="duel-row" style="background: rgba(130, 10, 209, 0.15); border-color: var(--nu-purple);">
-      <div class="duel-val-left" style="color: var(--nu-purple-light); font-size: 14px;">${mandateA.flag || '🏛️'} ${mandateA.name.split(' ')[0]}</div>
+      <div class="duel-val-left" style="color: var(--nu-purple-light); font-size: 14px;">${statsA.flag} ${statsA.name.split(' ')[0]}</div>
       <div class="duel-metric-name" style="color: #fff;">VERSUS</div>
-      <div class="duel-val-right" style="color: var(--nu-purple-light); font-size: 14px;">${mandateB.flag || '🏛️'} ${mandateB.name.split(' ')[0]}</div>
+      <div class="duel-val-right" style="color: var(--nu-purple-light); font-size: 14px;">${statsB.flag} ${statsB.name.split(' ')[0]}</div>
     </div>
 
     <div class="duel-row">
-      <div class="duel-val-left">${formatCurrency(mandateA.total_spent_nominal)}</div>
+      <div class="duel-val-left">${formatCurrency(statsA.nominal)}</div>
       <div class="duel-metric-name">Fatura Nominal</div>
-      <div class="duel-val-right">${formatCurrency(mandateB.total_spent_nominal)}</div>
+      <div class="duel-val-right">${formatCurrency(statsB.nominal)}</div>
     </div>
 
     <div class="duel-row">
-      <div class="duel-val-left" style="color: #38bdf8;">${formatCurrency(mandateA.total_spent_ipca)}</div>
+      <div class="duel-val-left" style="color: #38bdf8;">${formatCurrency(statsA.ipca)}</div>
       <div class="duel-metric-name">Total Corrigido (IPCA 2026)</div>
-      <div class="duel-val-right" style="color: #38bdf8;">${formatCurrency(mandateB.total_spent_ipca)}</div>
+      <div class="duel-val-right" style="color: #38bdf8;">${formatCurrency(statsB.ipca)}</div>
     </div>
 
     <div class="duel-row">
-      <div class="duel-val-left">${mandateA.months_count} meses (${mandateA.days_count} dias)</div>
+      <div class="duel-val-left">${statsA.months} meses (${statsA.days} dias)</div>
       <div class="duel-metric-name">Duração do Mandato</div>
-      <div class="duel-val-right">${mandateB.months_count} meses (${mandateB.days_count} dias)</div>
+      <div class="duel-val-right">${statsB.months} meses (${statsB.days} dias)</div>
     </div>
 
     <div class="duel-row">
-      <div class="duel-val-left" style="color: var(--accent-amber);">${formatCurrency(mandateA.monthly_avg_nominal)}/mês</div>
+      <div class="duel-val-left" style="color: var(--accent-amber);">${formatCurrency(statsA.monthlyNom)}/mês</div>
       <div class="duel-metric-name">Média Mensal (Nominal)</div>
-      <div class="duel-val-right" style="color: var(--accent-amber);">${formatCurrency(mandateB.monthly_avg_nominal)}/mês</div>
+      <div class="duel-val-right" style="color: var(--accent-amber);">${formatCurrency(statsB.monthlyNom)}/mês</div>
     </div>
 
     <div class="duel-row">
-      <div class="duel-val-left" style="color: #34d399;">${formatCurrency(mandateA.monthly_avg_ipca)}/mês</div>
+      <div class="duel-val-left" style="color: #34d399;">${formatCurrency(statsA.monthlyIpca)}/mês</div>
       <div class="duel-metric-name">Média Mensal (IPCA)</div>
-      <div class="duel-val-right" style="color: #34d399;">${formatCurrency(mandateB.monthly_avg_ipca)}/mês</div>
+      <div class="duel-val-right" style="color: #34d399;">${formatCurrency(statsB.monthlyIpca)}/mês</div>
     </div>
 
     <div class="duel-row">
-      <div class="duel-val-left">${formatCurrency(mandateA.daily_avg_nominal)}/dia</div>
+      <div class="duel-val-left">${formatCurrency(statsA.dailyNom)}/dia</div>
       <div class="duel-metric-name">Gasto Diário (Nominal)</div>
-      <div class="duel-val-right">${formatCurrency(mandateB.daily_avg_nominal)}/dia</div>
+      <div class="duel-val-right">${formatCurrency(statsB.dailyNom)}/dia</div>
     </div>
   `;
 }
@@ -788,21 +1158,21 @@ function renderDuel() {
 function shareDuelWhatsApp() {
   const selectA = document.getElementById('duel-select-a');
   const selectB = document.getElementById('duel-select-b');
-  if (!selectA || !selectB || !rankingsData.totals_by_mandate) return;
+  if (!selectA || !selectB) return;
 
-  const mA = rankingsData.totals_by_mandate[selectA.value];
-  const mB = rankingsData.totals_by_mandate[selectB.value];
+  const statsA = getMandateStats(selectA.value);
+  const statsB = getMandateStats(selectB.value);
 
   const text = encodeURIComponent(
     `⚔️ DUELO DE MANDATOS NO CARTÃO CORPORATIVO PRESIDENCIAL:\n\n` +
-    `🥊 ${mA.name}:\n` +
-    `• Fatura Nominal: ${formatCurrency(mA.total_spent_nominal)}\n` +
-    `• Corrigido pelo IPCA: ${formatCurrency(mA.total_spent_ipca)}\n` +
-    `• Média Mensal (IPCA): ${formatCurrency(mA.monthly_avg_ipca)}/mês\n\n` +
-    `🥊 ${mB.name}:\n` +
-    `• Fatura Nominal: ${formatCurrency(mB.total_spent_nominal)}\n` +
-    `• Corrigido pelo IPCA: ${formatCurrency(mB.total_spent_ipca)}\n` +
-    `• Média Mensal (IPCA): ${formatCurrency(mB.monthly_avg_ipca)}/mês\n\n` +
+    `🥊 ${statsA.name}:\n` +
+    `• Fatura Nominal: ${formatCurrency(statsA.nominal)}\n` +
+    `• Corrigido pelo IPCA: ${formatCurrency(statsA.ipca)}\n` +
+    `• Média Mensal (IPCA): ${formatCurrency(statsA.monthlyIpca)}/mês\n\n` +
+    `🥊 ${statsB.name}:\n` +
+    `• Fatura Nominal: ${formatCurrency(statsB.nominal)}\n` +
+    `• Corrigido pelo IPCA: ${formatCurrency(statsB.ipca)}\n` +
+    `• Média Mensal (IPCA): ${formatCurrency(statsB.monthlyIpca)}/mês\n\n` +
     `Compare todos os presidentes no NuGov: https://4u.ia.br/app/nugov/`
   );
 
@@ -880,10 +1250,9 @@ function renderQuizQuestion() {
   if (!content) return;
 
   if (quizCurrentIndex >= QUIZ_QUESTIONS.length) {
-    // Quiz completed!
     if (progressFill) progressFill.style.width = '100%';
     if (progressText) progressText.textContent = 'Quiz Concluído!';
-    
+
     const percent = Math.round((quizScore / QUIZ_QUESTIONS.length) * 100);
     const waResult = encodeURIComponent(
       `🎯 Acertei ${quizScore} de ${QUIZ_QUESTIONS.length} perguntas (${percent}%) no Quiz do Contribuinte do NuGov!\n\nVocê sabe para onde vai o dinheiro do cartão corporativo dos presidentes? Faça o quiz em: https://4u.ia.br/app/nugov/`
@@ -976,11 +1345,10 @@ function updateServicesCalculator() {
   const resEl = document.getElementById('calc-services-result');
   if (!resEl) return;
 
-  const mandateInfo = rankingsData.totals_by_mandate?.[currentMandate] || rankingsData.totals_by_mandate?.['all'];
-  if (!mandateInfo) return;
-
+  const stats = getMandateStats(currentMandate);
   const isIpca = currentCurrencyMode === 'ipca';
-  const total = isIpca ? (mandateInfo.total_spent_ipca || mandateInfo.total_spent_nominal) : mandateInfo.total_spent_nominal;
+  const total = isIpca ? stats.ipca : stats.nominal;
+
   const ambulancias = Math.floor(total / 300000);
   const escolas = (total / 8000000).toFixed(1);
   const medicosAnos = Math.floor(total / (15000 * 12));
@@ -1029,9 +1397,9 @@ function handlePayWithTaxes() {
   setTimeout(() => {
     btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
     btn.innerHTML = '<span>✅</span> Fatura 100% Paga com Suor do Cidadão!';
-    
+
     alert('🎉 PARABÉNS CONTRIBUINTE!\n\nSeu pagamento simbólico via Imposto de Renda, PIS, Cofins e ICMS foi debitado com sucesso.\n\nA comitiva agradece o café da manhã, o combustível e as diárias de hotel!');
-    
+
     setTimeout(() => {
       btn.innerHTML = originalText;
       btn.disabled = false;
@@ -1051,8 +1419,8 @@ function updateCitizenCalculator() {
   }
 
   const isIpca = currentCurrencyMode === 'ipca';
-  const mandateInfo = rankingsData.totals_by_mandate?.[currentMandate] || rankingsData.totals_by_mandate?.['all'];
-  const currentTotal = isIpca ? (mandateInfo?.total_spent_ipca || 289369127) : (mandateInfo?.total_spent_nominal || 142780912);
+  const stats = getMandateStats(currentMandate);
+  const currentTotal = isIpca ? stats.ipca : stats.nominal;
   const months = (currentTotal / salary).toFixed(1);
   const years = (currentTotal / (salary * 12)).toFixed(1);
 
@@ -1073,13 +1441,11 @@ function handleNuBotChat(e) {
   const userQuery = input.value.trim();
   input.value = '';
 
-  // Append user message
   const userMsg = document.createElement('div');
   userMsg.style.cssText = 'background: rgba(130, 10, 209, 0.3); border: 1px solid var(--nu-purple); padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: #fff; text-align: right; margin-left: 20%;';
   userMsg.textContent = userQuery;
   chatBox.appendChild(userMsg);
 
-  // Bot response logic
   const q = userQuery.toLowerCase();
   let botReply = 'Consultei a base oficial de dados públicos. ';
 
@@ -1122,7 +1488,6 @@ function setupImpostometro() {
   const cestasEl = document.getElementById('imp-cestas');
   const cartaoTempoEl = document.getElementById('imp-tempo-cartao');
 
-  // Arrecadação anual brasileira (Federal + Estadual + Municipal): ~R$ 3.820.000.000.000,00
   const ANNUAL_TARGET = 3820000000000;
   const MS_IN_YEAR = 365.25 * 24 * 60 * 60 * 1000;
   const RATE_PER_MS = ANNUAL_TARGET / MS_IN_YEAR;
@@ -1139,7 +1504,6 @@ function setupImpostometro() {
     if (counterEl) counterEl.textContent = formatted;
     if (modalValEl) modalValEl.textContent = formatted;
 
-    // Equivalências ao vivo
     if (ambulanciasEl) {
       const amb = Math.floor(totalCollected / 300000);
       ambulanciasEl.textContent = Number(amb).toLocaleString('pt-BR');

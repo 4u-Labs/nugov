@@ -17,48 +17,51 @@
 <body>
   <div class="bg-glow-mesh"></div>
 
-  <!-- Top Bar: Impostômetro Nacional em Tempo Real -->
-  <div class="impostometro-top-bar" onclick="openModal('modal-impostometro')" title="Clique para ver o que daria para pagar com esses impostos">
-    <div class="container">
-      <div class="impostometro-content">
-        <div class="imposto-badge-live">
-          <span class="live-dot"></span> AO VIVO
-        </div>
-        <div class="imposto-text-wrap">
-          <span class="imposto-label">🇧🇷 Impostômetro Nacional <?php echo date('Y'); ?>:</span>
-          <span id="impostometro-live-counter" class="imposto-counter-val">Carregando...</span>
-          <span class="imposto-speed">(+R$ 120.490/seg)</span>
-        </div>
-        <div class="imposto-btn-info">
-          <span>Ver Impacto</span> ➔
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header class="nugov-header">
-    <div class="container">
-      <div class="header-content">
-        <a href="index.php" class="brand-area">
-          <div class="brand-logo-badge">nu</div>
-          <div class="brand-titles">
-            <h1>NuGov <span>REPÚBLICA</span></h1>
-            <p>O extrato que o contribuinte paga todo mês</p>
+  <!-- Sticky Top Wrapper: Impostômetro + NuGov Header -->
+  <div class="sticky-top-wrapper">
+    <!-- Top Bar: Impostômetro Nacional em Tempo Real -->
+    <div class="impostometro-top-bar" onclick="openModal('modal-impostometro')" title="Clique para ver o que daria para pagar com esses impostos">
+      <div class="container">
+        <div class="impostometro-content">
+          <div class="imposto-badge-live">
+            <span class="live-dot"></span> AO VIVO
           </div>
-        </a>
-        <div class="header-actions">
-          <button id="btn-pwa-install" class="btn-header-install" type="button">
-            <span class="material-symbols-outlined" style="font-size: 16px;">install_mobile</span>
-            Instalar App
-          </button>
-          <button class="btn-icon-header" type="button" onclick="openModal('modal-nubot')" title="Conversar com o NuBot">
-            <span class="material-symbols-outlined" style="font-size: 20px;">smart_toy</span>
-          </button>
+          <div class="imposto-text-wrap">
+            <span class="imposto-label">🇧🇷 Impostômetro Nacional <?php echo date('Y'); ?>:</span>
+            <span id="impostometro-live-counter" class="imposto-counter-val">Carregando...</span>
+            <span class="imposto-speed">(+R$ 120.490/seg)</span>
+          </div>
+          <div class="imposto-btn-info">
+            <span>Ver Impacto</span> ➔
+          </div>
         </div>
       </div>
     </div>
-  </header>
+
+    <!-- Header -->
+    <header class="nugov-header">
+      <div class="container">
+        <div class="header-content">
+          <a href="index.php" class="brand-area">
+            <div class="brand-logo-badge">nu</div>
+            <div class="brand-titles">
+              <h1>NuGov <span>REPÚBLICA</span></h1>
+              <p>O extrato que o contribuinte paga todo mês</p>
+            </div>
+          </a>
+          <div class="header-actions">
+            <button id="btn-pwa-install" class="btn-header-install" type="button">
+              <span class="material-symbols-outlined" style="font-size: 16px;">install_mobile</span>
+              Instalar App
+            </button>
+            <button class="btn-icon-header" type="button" onclick="openModal('modal-nubot')" title="Conversar com o NuBot">
+              <span class="material-symbols-outlined" style="font-size: 20px;">smart_toy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
 
   <main class="container">
     <!-- Mandates Filter Carousel -->

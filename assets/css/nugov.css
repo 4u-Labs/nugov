@@ -61,16 +61,21 @@ body {
   z-index: 1;
 }
 
-/* Header */
-.nugov-header {
-  padding: 18px 0 14px;
-  border-bottom: 1px solid var(--border-glass);
-  background: rgba(10, 10, 15, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+/* Sticky Top Wrapper */
+.sticky-top-wrapper {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 200;
+  width: 100%;
+}
+
+/* Header */
+.nugov-header {
+  padding: 14px 0 12px;
+  border-bottom: 1px solid var(--border-glass);
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .header-content {
@@ -787,12 +792,12 @@ body {
 /* ── IMPOSTÔMETRO NACIONAL EM TEMPO REAL ── */
 .impostometro-top-bar {
   background: linear-gradient(90deg, #1b072e 0%, #0d0417 50%, #1b072e 100%);
-  border-bottom: 1px solid rgba(155, 59, 238, 0.3);
+  border-bottom: 1px solid rgba(155, 59, 238, 0.35);
   padding: 8px 0;
   font-size: 11.5px;
   cursor: pointer;
-  position: relative;
-  z-index: 101;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   transition: background 0.2s;
 }
 

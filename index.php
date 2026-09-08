@@ -12,7 +12,7 @@
   <meta name="theme-color" content="#820ad1">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟣</text></svg>">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-  <link rel="stylesheet" href="assets/css/nugov.css">
+  <link rel="stylesheet" href="assets/css/nugov.css?v=<?php echo filemtime('assets/css/nugov.css'); ?>">
 </head>
 <body>
   <div class="bg-glow-mesh"></div>
@@ -238,6 +238,12 @@
     <div class="transactions-header">
       <h2>Extrato de Lançamentos</h2>
       <span id="feed-count" class="feed-counter">Carregando dados públicos...</span>
+    </div>
+
+    <!-- Active Filter Indicator Banner -->
+    <div id="active-filter-banner" style="display: none; margin-bottom: 12px; background: rgba(130, 10, 209, 0.18); border: 1px solid var(--nu-purple); border-radius: 10px; padding: 10px 14px; font-size: 12px; color: #fff; justify-content: space-between; align-items: center;">
+      <span id="active-filter-text">Filtrando por: <strong>...</strong></span>
+      <button type="button" id="btn-clear-filters" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800; cursor: pointer;">Ver Todas as Despesas ✕</button>
     </div>
 
     <div id="transactions-feed" class="transactions-list">
@@ -575,7 +581,7 @@
     </div>
   </footer>
 
-  <script src="assets/js/app.js"></script>
-  <script src="assets/js/pwa.js"></script>
+  <script src="assets/js/app.js?v=<?php echo filemtime('assets/js/app.js'); ?>"></script>
+  <script src="assets/js/pwa.js?v=<?php echo filemtime('assets/js/pwa.js'); ?>"></script>
 </body>
 </html>

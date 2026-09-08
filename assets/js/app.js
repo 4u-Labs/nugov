@@ -123,6 +123,20 @@ function setupEventListeners() {
     });
   });
 
+  // Clear Filters button
+  document.getElementById('btn-clear-filters')?.addEventListener('click', () => {
+    currentCategory = 'all';
+    currentUF = 'all';
+    searchQuery = '';
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    document.querySelector('.cat-pill[data-category="all"]')?.classList.add('active');
+    const ufSelect = document.getElementById('feed-uf-filter');
+    if (ufSelect) ufSelect.value = 'all';
+    const searchIn = document.getElementById('feed-search');
+    if (searchIn) searchIn.value = '';
+    renderTransactions();
+  });
+
   // Pay with Taxes action button
   const payTaxBtn = document.getElementById('btn-pay-tax');
   if (payTaxBtn) {
@@ -295,11 +309,29 @@ function renderTransactions() {
     countEl.textContent = `${filtered.length} lançamento(s) exibido(s)`;
   }
 
+  // Active filter banner control
+  const filterBanner = document.getElementById('active-filter-banner');
+  const filterText = document.getElementById('active-filter-text');
+  const hasFilter = currentCategory !== 'all' || currentUF !== 'all' || searchQuery !== '';
+  if (filterBanner && filterText) {
+    if (hasFilter) {
+      filterBanner.style.display = 'flex';
+      let desc = [];
+      if (currentCategory !== 'all') desc.push(`Categoria: "${currentCategory}"`);
+      if (currentUF !== 'all') desc.push(`Estado: ${currentUF}`);
+      if (searchQuery) desc.push(`Busca: "${searchQuery}"`);
+      filterText.innerHTML = `🔍 Filtrando por: <strong>${desc.join(' • ')}</strong> (${filtered.length} lançamento(s))`;
+    } else {
+      filterBanner.style.display = 'none';
+    }
+  }
+
   if (filtered.length === 0) {
     listEl.innerHTML = `
       <div style="text-align: center; padding: 40px 20px; color: var(--text-muted); background: var(--bg-card); border-radius: 14px;">
         <span style="font-size: 32px; display: block; margin-bottom: 8px;">🔍</span>
         Nenhum gasto encontrado para os filtros selecionados.
+        ${hasFilter ? '<br><button type="button" onclick="document.getElementById(\'btn-clear-filters\').click()" style="margin-top: 12px; background: var(--nu-purple); border: none; color: #fff; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer;">Limpar Filtros e Ver Todos</button>' : ''}
       </div>
     `;
     return;

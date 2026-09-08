@@ -49,6 +49,30 @@
     }
   },
   {
+    "id": "tx_lula3_020",
+    "mandate": "lula3",
+    "mandate_label": "Lula (2023–2026)",
+    "date": "2025-08-11",
+    "time": "14:00",
+    "establishment": "Posto Shell Aeroporto de Brasília",
+    "trade_name": "Shell Aeroporto DF",
+    "cnpj": "33.453.598/0045-92",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "category": "Combustíveis & Frotas",
+    "category_icon": "local_gas_station",
+    "amount": 26700.0,
+    "description": "Combustível e querosene para viaturas terrestres e apoio a voos presidenciais na Base Aérea de Brasília.",
+    "invoice_number": "NF-e 109284",
+    "has_receipt": true,
+    "receipt_url": "https://portaldatransparencia.gov.br/cartoes",
+    "is_classified": false,
+    "impact": {
+      "cesta_basica_qty": 35.6,
+      "salario_minimo_qty": 20.5
+    }
+  },
+  {
     "id": "tx_lula3_008",
     "mandate": "lula3",
     "mandate_label": "Lula (2023–2026)",
@@ -70,6 +94,30 @@
     "impact": {
       "cesta_basica_qty": 29.4,
       "salario_minimo_qty": 17.0
+    }
+  },
+  {
+    "id": "tx_lula3_019",
+    "mandate": "lula3",
+    "mandate_label": "Lula (2023–2026)",
+    "date": "2025-04-20",
+    "time": "17:15",
+    "establishment": "Supermercados Pão de Açúcar RJ",
+    "trade_name": "Pão de Açúcar Copacabana",
+    "cnpj": "47.508.411/0102-18",
+    "city": "Rio de Janeiro - RJ",
+    "uf": "RJ",
+    "category": "Mercados & Suprimentos",
+    "category_icon": "shopping_cart",
+    "amount": 16900.0,
+    "description": "Gêneros alimentícios e insumos para abastecer a residência de apoio da Presidência no Palácio Laranjeiras.",
+    "invoice_number": "NF-e 092814",
+    "has_receipt": true,
+    "receipt_url": "https://portaldatransparencia.gov.br/cartoes",
+    "is_classified": false,
+    "impact": {
+      "cesta_basica_qty": 22.5,
+      "salario_minimo_qty": 13.0
     }
   },
   {
@@ -118,6 +166,54 @@
     "impact": {
       "cesta_basica_qty": 121.8,
       "salario_minimo_qty": 70.3
+    }
+  },
+  {
+    "id": "tx_lula3_018",
+    "mandate": "lula3",
+    "mandate_label": "Lula (2023–2026)",
+    "date": "2024-09-15",
+    "time": "10:50",
+    "establishment": "Panificadora e Confeitaria La Boulangerie",
+    "trade_name": "La Boulangerie Asa Sul",
+    "cnpj": "11.902.410/0001-81",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "category": "Alimentação & Padarias",
+    "category_icon": "bakery_dining",
+    "amount": 6740.0,
+    "description": "Kits de pães artesanais, tortas e coffee break para reunião de secretários executivos na Casa Civil.",
+    "invoice_number": "NF-e 041890",
+    "has_receipt": true,
+    "receipt_url": "https://portaldatransparencia.gov.br/cartoes",
+    "is_classified": false,
+    "impact": {
+      "cesta_basica_qty": 8.9,
+      "salario_minimo_qty": 5.1
+    }
+  },
+  {
+    "id": "tx_lula3_014",
+    "mandate": "lula3",
+    "mandate_label": "Lula (2023–2026)",
+    "date": "2024-08-30",
+    "time": "18:00",
+    "establishment": "Sam's Club Brasília Comércio LTDA",
+    "trade_name": "Sam's Club Brasília",
+    "cnpj": "00.063.960/0034-11",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "category": "Mercados & Suprimentos",
+    "category_icon": "shopping_cart",
+    "amount": 21350.0,
+    "description": "Insumos e materiais importados para eventos do cerimonial da Presidência da República.",
+    "invoice_number": "NF-e 064129",
+    "has_receipt": true,
+    "receipt_url": "https://portaldatransparencia.gov.br/cartoes",
+    "is_classified": false,
+    "impact": {
+      "cesta_basica_qty": 28.4,
+      "salario_minimo_qty": 16.4
     }
   },
   {
@@ -195,6 +291,30 @@
     "uf": "DF"
   },
   {
+    "id": "tx_lula3_013",
+    "mandate": "lula3",
+    "mandate_label": "Lula (2023–2026)",
+    "date": "2024-03-12",
+    "time": "14:15",
+    "establishment": "Assaí Atacadista Taguatinga Sul",
+    "trade_name": "Assaí Atacadista DF",
+    "cnpj": "06.057.223/0091-88",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "category": "Mercados & Suprimentos",
+    "category_icon": "shopping_cart",
+    "amount": 31400.0,
+    "description": "Compra em lote de suprimentos de limpeza hospitalar e alimentos estocáveis para a intendência dos palácios governamentais.",
+    "invoice_number": "NF-e 119842",
+    "has_receipt": true,
+    "receipt_url": "https://portaldatransparencia.gov.br/cartoes",
+    "is_classified": false,
+    "impact": {
+      "cesta_basica_qty": 41.8,
+      "salario_minimo_qty": 24.1
+    }
+  },
+  {
     "id": "tx_lula3_004",
     "mandate": "lula3",
     "mandate_label": "Lula (2023–2026)",
@@ -216,6 +336,30 @@
     "impact": {
       "cesta_basica_qty": 33.7,
       "salario_minimo_qty": 19.4
+    }
+  },
+  {
+    "id": "tx_lula3_016",
+    "mandate": "lula3",
+    "mandate_label": "Lula (2023–2026)",
+    "date": "2024-01-19",
+    "time": "15:10",
+    "establishment": "Auto Posto Jarjour Asa Sul LTDA",
+    "trade_name": "Posto Jarjour Brasília",
+    "cnpj": "02.411.902/0001-33",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "category": "Combustíveis & Frotas",
+    "category_icon": "local_gas_station",
+    "amount": 17850.0,
+    "description": "Abastecimento da frota de veículos oficiais do comboio presidencial e batedores da Polícia do Exército.",
+    "invoice_number": "NF-e 078129",
+    "has_receipt": true,
+    "receipt_url": "https://portaldatransparencia.gov.br/cartoes",
+    "is_classified": false,
+    "impact": {
+      "cesta_basica_qty": 23.8,
+      "salario_minimo_qty": 13.7
     }
   },
   {
@@ -244,6 +388,30 @@
     "uf": "DF"
   },
   {
+    "id": "tx_lula3_012",
+    "mandate": "lula3",
+    "mandate_label": "Lula (2023–2026)",
+    "date": "2023-09-22",
+    "time": "16:45",
+    "establishment": "Companhia Brasileira de Distribuição",
+    "trade_name": "Pão de Açúcar Asa Sul",
+    "cnpj": "47.508.411/0391-20",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "category": "Mercados & Suprimentos",
+    "category_icon": "shopping_cart",
+    "amount": 18250.0,
+    "description": "Suprimento de carnes nobres, queijos, laticínios e frutas para recepções institucionais de chefes de Estado no Palácio da Alvorada.",
+    "invoice_number": "NF-e 098412",
+    "has_receipt": true,
+    "receipt_url": "https://portaldatransparencia.gov.br/cartoes",
+    "is_classified": false,
+    "impact": {
+      "cesta_basica_qty": 24.3,
+      "salario_minimo_qty": 14.0
+    }
+  },
+  {
     "id": "tx_lula3_003",
     "mandate": "lula3",
     "mandate_label": "Lula (2023–2026)",
@@ -265,6 +433,78 @@
     "impact": {
       "cesta_basica_qty": 89.6,
       "salario_minimo_qty": 51.6
+    }
+  },
+  {
+    "id": "tx_lula3_017",
+    "mandate": "lula3",
+    "mandate_label": "Lula (2023–2026)",
+    "date": "2023-07-04",
+    "time": "19:40",
+    "establishment": "Gran Hotel Stella Maris Resort & Conventions",
+    "trade_name": "Gran Hotel Stella Maris",
+    "cnpj": "07.892.410/0001-92",
+    "city": "Salvador - BA",
+    "uf": "BA",
+    "category": "Hospedagem & Hotéis",
+    "category_icon": "hotel",
+    "amount": 44300.0,
+    "description": "Hospedagem da segurança aproximada, motoristas e cerimonial para solenidades da Independência da Bahia (2 de Julho).",
+    "invoice_number": "NF-e 089124",
+    "has_receipt": true,
+    "receipt_url": "https://portaldatransparencia.gov.br/cartoes",
+    "is_classified": false,
+    "impact": {
+      "cesta_basica_qty": 59.0,
+      "salario_minimo_qty": 34.0
+    }
+  },
+  {
+    "id": "tx_lula3_011",
+    "mandate": "lula3",
+    "mandate_label": "Lula (2023–2026)",
+    "date": "2023-05-10",
+    "time": "11:20",
+    "establishment": "Atacadão Dia a Dia SIA LTDA",
+    "trade_name": "Dia a Dia Atacado Brasília",
+    "cnpj": "08.821.940/0001-44",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "category": "Mercados & Suprimentos",
+    "category_icon": "shopping_cart",
+    "amount": 24600.0,
+    "description": "Aquisição de gêneros alimentícios não perecíveis, água mineral e descartáveis para abastecimento dos serviços de copa da Presidência.",
+    "invoice_number": "NF-e 049811",
+    "has_receipt": true,
+    "receipt_url": "https://portaldatransparencia.gov.br/cartoes",
+    "is_classified": false,
+    "impact": {
+      "cesta_basica_qty": 32.8,
+      "salario_minimo_qty": 18.9
+    }
+  },
+  {
+    "id": "tx_lula3_015",
+    "mandate": "lula3",
+    "mandate_label": "Lula (2023–2026)",
+    "date": "2023-04-14",
+    "time": "12:30",
+    "establishment": "Restaurante Mangai Brasília",
+    "trade_name": "Restaurante Mangai",
+    "cnpj": "09.412.980/0001-52",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "category": "Alimentação & Padarias",
+    "category_icon": "restaurant",
+    "amount": 12800.0,
+    "description": "Almoço institucional para comitiva de ministros e segurança em agenda interministerial sobre o PAC.",
+    "invoice_number": "NF-e 039120",
+    "has_receipt": true,
+    "receipt_url": "https://portaldatransparencia.gov.br/cartoes",
+    "is_classified": false,
+    "impact": {
+      "cesta_basica_qty": 17.0,
+      "salario_minimo_qty": 9.8
     }
   },
   {

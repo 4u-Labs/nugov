@@ -872,184 +872,231 @@ function openTransactionModal(txId) {
 
 // Client-side pure HTML5 Canvas 9:16 Instagram Story Card Generator
 function generateStoryCard(tx) {
-  const canvas = document.createElement('canvas');
-  canvas.width = 1080;
-  canvas.height = 1920;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
+  const chipImg = new Image();
+  chipImg.crossOrigin = 'anonymous';
+  chipImg.src = 'assets/img/chip.png';
 
-  const year = tx.date ? parseInt(tx.date.substring(0, 4)) : 2026;
-  const factor = IPCA_FACTORS[year] || 1.0;
-  const ipcaAmount = tx.amount * factor;
+  const render = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080;
+    canvas.height = 1920;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-  // Background Gradient
-  const grad = ctx.createLinearGradient(0, 0, 0, 1920);
-  grad.addColorStop(0, '#0a0a0f');
-  grad.addColorStop(0.35, '#1e0536');
-  grad.addColorStop(0.7, '#130424');
-  grad.addColorStop(1, '#05020a');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 1080, 1920);
+    const year = tx.date ? parseInt(tx.date.substring(0, 4)) : 2026;
+    const factor = IPCA_FACTORS[year] || 1.0;
+    const ipcaAmount = tx.amount * factor;
 
-  // Glow Circles
-  ctx.save();
-  ctx.fillStyle = 'rgba(130, 10, 209, 0.35)';
-  ctx.filter = 'blur(120px)';
-  ctx.beginPath();
-  ctx.arc(200, 300, 260, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.arc(880, 1600, 260, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
+    // Background Gradient - Rich Ultraviolet Depth
+    const grad = ctx.createLinearGradient(0, 0, 0, 1920);
+    grad.addColorStop(0, '#0c0717');
+    grad.addColorStop(0.25, '#1e0836');
+    grad.addColorStop(0.65, '#140524');
+    grad.addColorStop(1, '#080312');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1080, 1920);
 
-  // Outer Border
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-  ctx.lineWidth = 4;
-  ctx.strokeRect(50, 50, 980, 1820);
+    // Glowing Ambient Orbs
+    ctx.save();
+    ctx.fillStyle = 'rgba(147, 51, 234, 0.45)';
+    ctx.filter = 'blur(100px)';
+    ctx.beginPath();
+    ctx.arc(300, 450, 320, 0, Math.PI * 2);
+    ctx.fill();
 
-  // Top Branding
-  ctx.fillStyle = '#820ad1';
-  ctx.beginPath();
-  ctx.roundRect(100, 120, 80, 80, 20);
-  ctx.fill();
+    ctx.fillStyle = 'rgba(56, 189, 248, 0.25)';
+    ctx.beginPath();
+    ctx.arc(800, 1300, 320, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
 
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 44px -apple-system, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('nu', 140, 178);
+    // Outer Border
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(40, 40, 1000, 1840);
 
-  ctx.textAlign = 'left';
-  ctx.font = 'bold 48px -apple-system, sans-serif';
-  ctx.fillText('NuGov REPÚBLICA', 210, 160);
-  ctx.fillStyle = '#94a3b8';
-  ctx.font = '30px -apple-system, sans-serif';
-  ctx.fillText('O extrato que o contribuinte paga todo mês', 210, 200);
+    // Top Branding
+    const logoGrad = ctx.createLinearGradient(90, 110, 180, 200);
+    logoGrad.addColorStop(0, '#8b10e6');
+    logoGrad.addColorStop(1, '#55078a');
+    ctx.fillStyle = logoGrad;
+    ctx.beginPath();
+    ctx.roundRect(90, 110, 84, 84, 22);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
 
-  // Badge: Comprovante Oficial
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-  ctx.beginPath();
-  ctx.roundRect(100, 270, 880, 90, 20);
-  ctx.fill();
-  ctx.fillStyle = '#fbbf24';
-  ctx.font = 'bold 36px -apple-system, sans-serif';
-  ctx.fillText('🧾 LANÇAMENTO OFICIAL NO CARTÃO CORPORATIVO', 140, 328);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 46px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('nu', 132, 170);
 
-  // Card Mockup Container
-  ctx.fillStyle = 'rgba(17, 5, 34, 0.85)';
-  ctx.strokeStyle = 'rgba(155, 59, 238, 0.4)';
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.roundRect(100, 400, 880, 820, 36);
-  ctx.fill();
-  ctx.stroke();
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 50px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('NuGov REPÚBLICA', 200, 155);
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = '500 28px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('O extrato que o contribuinte paga todo mês', 200, 195);
 
-  // Gold Chip
-  const chipGrad = ctx.createLinearGradient(160, 460, 280, 550);
-  chipGrad.addColorStop(0, '#ffd700');
-  chipGrad.addColorStop(1, '#b8860b');
-  ctx.fillStyle = chipGrad;
-  ctx.beginPath();
-  ctx.roundRect(160, 460, 120, 90, 16);
-  ctx.fill();
+    // Badge: Comprovante Oficial
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(90, 250, 900, 84, 20);
+    ctx.fill();
+    ctx.stroke();
 
-  // Government badge
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
-  ctx.beginPath();
-  ctx.roundRect(620, 460, 300, 60, 14);
-  ctx.fill();
-  ctx.fillStyle = '#e2e8f0';
-  ctx.font = 'bold 26px -apple-system, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText(tx.mandate_label?.split(' ')[0].toUpperCase() || 'PRESIDÊNCIA', 770, 500);
+    ctx.fillStyle = '#fde047';
+    ctx.font = 'bold 34px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🧾 LANÇAMENTO OFICIAL NO CARTÃO CORPORATIVO', 540, 304);
 
-  // Big Amount Display
-  ctx.textAlign = 'left';
-  ctx.fillStyle = '#94a3b8';
-  ctx.font = 'bold 28px -apple-system, sans-serif';
-  ctx.fillText('VALOR TOTAL PAGO COM RECURSOS PÚBLICOS:', 160, 640);
+    // Card Mockup Container
+    ctx.fillStyle = 'rgba(26, 14, 48, 0.95)';
+    ctx.strokeStyle = 'rgba(192, 132, 252, 0.7)';
+    ctx.lineWidth = 3.5;
+    ctx.beginPath();
+    ctx.roundRect(90, 370, 900, 850, 36);
+    ctx.fill();
+    ctx.stroke();
 
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 88px -apple-system, sans-serif';
-  ctx.fillText(formatCurrency(tx.amount), 160, 740);
+    // Draw Real EMV Chip
+    if (chipImg.complete && chipImg.naturalWidth > 0) {
+      ctx.drawImage(chipImg, 150, 430, 125, 100);
+    } else {
+      const chipGrad = ctx.createLinearGradient(150, 430, 275, 530);
+      chipGrad.addColorStop(0, '#ffd700');
+      chipGrad.addColorStop(1, '#b8860b');
+      ctx.fillStyle = chipGrad;
+      ctx.beginPath();
+      ctx.roundRect(150, 430, 125, 95, 16);
+      ctx.fill();
+    }
 
-  // IPCA Corrected
-  ctx.fillStyle = '#38bdf8';
-  ctx.font = 'bold 36px -apple-system, sans-serif';
-  ctx.fillText(`📈 Corrigido IPCA (2026): ${formatCurrency(ipcaAmount)}`, 160, 810);
+    // Government badge top-right
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.18)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(610, 435, 320, 64, 16);
+    ctx.fill();
+    ctx.stroke();
 
-  // Divider
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(160, 860);
-  ctx.lineTo(920, 860);
-  ctx.stroke();
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(tx.mandate_label?.split(' ')[0].toUpperCase() || 'PRESIDÊNCIA', 770, 477);
 
-  // Establishment & Details
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 44px -apple-system, sans-serif';
-  ctx.fillText(tx.trade_name || tx.establishment, 160, 930);
+    // Big Amount Display
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('VALOR TOTAL PAGO COM RECURSOS PÚBLICOS:', 150, 610);
 
-  ctx.fillStyle = '#94a3b8';
-  ctx.font = '32px -apple-system, sans-serif';
-  ctx.fillText(`📍 ${tx.city}   •   📅 ${formatDate(tx.date)}`, 160, 990);
-  ctx.fillText(`CNPJ: ${tx.cnpj}   •   ${tx.category}`, 160, 1050);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '900 92px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(formatCurrency(tx.amount), 150, 715);
 
-  ctx.fillStyle = '#fbbf24';
-  ctx.font = 'bold 32px -apple-system, sans-serif';
-  ctx.fillText(`Governo: ${tx.mandate_label}`, 160, 1140);
+    // IPCA Corrected Line
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = 'bold 36px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(`📈 Corrigido IPCA (2026): ${formatCurrency(ipcaAmount)} (${factor.toFixed(2)}x)`, 150, 785);
 
-  // Impact Section Box
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.roundRect(100, 1260, 880, 240, 28);
-  ctx.fill();
-  ctx.stroke();
+    // Divider
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(150, 835);
+    ctx.lineTo(930, 835);
+    ctx.stroke();
 
-  ctx.fillStyle = '#e2e8f0';
-  ctx.font = 'bold 34px -apple-system, sans-serif';
-  ctx.fillText('⚖️ EQUIVALÊNCIA NO BOLSO DO CIDADÃO:', 150, 1330);
+    // Establishment & Details
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 46px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(tx.trade_name || tx.establishment, 150, 905);
 
-  ctx.fillStyle = '#fbbf24';
-  ctx.font = 'bold 64px -apple-system, sans-serif';
-  ctx.fillText(`≈ ${tx.impact?.salario_minimo_qty || 1} Salários Mínimos`, 150, 1420);
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = '500 32px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(`📍 ${tx.city}   •   📅 ${formatDate(tx.date)}`, 150, 965);
+    ctx.fillText(`CNPJ: ${tx.cnpj}   •   ${tx.category}`, 150, 1025);
 
-  ctx.fillStyle = '#10b981';
-  ctx.font = 'bold 36px -apple-system, sans-serif';
-  ctx.fillText(`ou ≈ ${tx.impact?.cesta_basica_qty || 1} Cestas Básicas Familiares`, 150, 1475);
+    ctx.fillStyle = '#fde047';
+    ctx.font = 'bold 32px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(`🏛️ Governo: ${tx.mandate_label}`, 150, 1115);
 
-  // Footer Verification Badge
-  ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
-  ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.roundRect(100, 1540, 880, 140, 20);
-  ctx.fill();
-  ctx.stroke();
+    // Impact Section Box
+    ctx.fillStyle = 'rgba(15, 10, 32, 0.95)';
+    ctx.strokeStyle = 'rgba(251, 191, 36, 0.45)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.roundRect(90, 1260, 900, 240, 28);
+    ctx.fill();
+    ctx.stroke();
 
-  ctx.fillStyle = '#10b981';
-  ctx.font = 'bold 30px -apple-system, sans-serif';
-  ctx.fillText('🛡️ DADO PÚBLICO OFICIAL — LEI DE ACESSO À INFORMAÇÃO', 140, 1595);
-  ctx.fillStyle = '#94a3b8';
-  ctx.font = '26px -apple-system, sans-serif';
-  ctx.fillText('Fonte: Controladoria-Geral da União (CGU) / Portal da Transparência', 140, 1640);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 32px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('⚖️ EQUIVALÊNCIA NO BOLSO DO CIDADÃO:', 140, 1330);
 
-  // Watermark URL
-  ctx.textAlign = 'center';
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 38px -apple-system, sans-serif';
-  ctx.fillText('👉 Acesse todos os lançamentos em: 4u.ia.br/app/nugov', 540, 1780);
+    ctx.fillStyle = '#fde047';
+    ctx.font = '900 68px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(`≈ ${tx.impact?.salario_minimo_qty || 1} Salários Mínimos`, 140, 1420);
 
-  // Download image
-  const link = document.createElement('a');
-  link.download = `nugov-comprovante-${tx.id}.png`;
-  link.href = canvas.toDataURL('image/png');
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+    ctx.fillStyle = '#34d399';
+    ctx.font = 'bold 38px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(`ou ≈ ${tx.impact?.cesta_basica_qty || 1} Cestas Básicas Familiares`, 140, 1475);
+
+    // Footer Verification Badge
+    ctx.fillStyle = 'rgba(16, 185, 129, 0.22)';
+    ctx.strokeStyle = 'rgba(52, 211, 153, 0.65)';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.roundRect(90, 1535, 900, 145, 20);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#34d399';
+    ctx.font = 'bold 30px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('🛡️ DADO PÚBLICO OFICIAL — LEI DE ACESSO À INFORMAÇÃO', 140, 1590);
+
+    ctx.fillStyle = '#e2e8f0';
+    ctx.font = '500 26px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('Fonte: Controladoria-Geral da União (CGU) / Portal da Transparência', 140, 1635);
+
+    // Watermark CTA Banner
+    const ctaGrad = ctx.createLinearGradient(90, 1715, 990, 1805);
+    ctaGrad.addColorStop(0, '#8b10e6');
+    ctaGrad.addColorStop(1, '#55078a');
+    ctx.fillStyle = ctaGrad;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(90, 1715, 900, 90, 45);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 36px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('👉 Acesse todos os lançamentos em: 4u.ia.br/app/nugov', 540, 1772);
+
+    // Download image
+    const link = document.createElement('a');
+    link.download = `nugov-comprovante-${tx.id}.png`;
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  if (chipImg.complete && chipImg.naturalWidth > 0) {
+    render();
+  } else {
+    chipImg.onload = render;
+    chipImg.onerror = render;
+  }
 }
 
 // Render Top 10 Empresas Favorecidas Modal

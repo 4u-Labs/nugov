@@ -95,7 +95,9 @@
       <div class="credit-card-3d-wrap">
         <div class="presidential-card">
           <div class="card-chip-band">
-            <div class="gold-chip"></div>
+            <div class="card-chip-wrap">
+              <img src="assets/img/chip.png?v=<?php echo filemtime('assets/img/chip.png'); ?>" alt="Chip de Cartão" class="card-chip-img">
+            </div>
             <div class="card-contactless">
               <span class="material-symbols-outlined">contactless</span>
             </div>

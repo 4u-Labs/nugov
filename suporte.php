@@ -173,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
       <div class="header-content">
         <a href="index.php" class="brand-area">
-          <div class="brand-logo-badge">nu</div>
+          <img src="assets/img/app-logo.png?v=<?php echo filemtime('assets/img/app-logo.png'); ?>" alt="NuGov" class="brand-logo-img">
           <div class="brand-titles">
             <h1>NuGov <span>SUPORTE & FAQ</span></h1>
             <p>Perguntas frequentes e canal de contato</p>

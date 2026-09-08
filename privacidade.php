@@ -63,7 +63,7 @@
     <div class="container">
       <div class="header-content">
         <a href="index.php" class="brand-area">
-          <div class="brand-logo-badge">nu</div>
+          <img src="assets/img/app-logo.png?v=<?php echo filemtime('assets/img/app-logo.png'); ?>" alt="NuGov" class="brand-logo-img">
           <div class="brand-titles">
             <h1>NuGov <span>PRIVACIDADE</span></h1>
             <p>Compromisso com a LGPD e Retenção Zero</p>

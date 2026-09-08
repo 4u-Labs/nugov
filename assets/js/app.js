@@ -735,7 +735,7 @@ function renderTransactions() {
       if (currentCategory !== 'all') desc.push(`Categoria: "${currentCategory}"`);
       if (currentUF !== 'all') desc.push(`Estado: ${currentUF}`);
       if (searchQuery) desc.push(`Busca: "${searchQuery}"`);
-      filterText.innerHTML = `🔍 Filtrando por: <strong>${desc.join(' • ')}</strong> (${top10Txs.length} de ${filtered.length} lançamentos)`;
+      filterText.innerHTML = `🔍 Filtrando por: <strong>${desc.join(' • ')}</strong> (Exibindo os ${top10Txs.length} maiores gastos auditados)`;
     } else {
       filterBanner.style.display = 'none';
     }

@@ -71,6 +71,22 @@
       <button class="mandate-pill" data-mandate="lula1_2">⭐ Lula (2003–2010)</button>
     </div>
 
+    <!-- Currency Mode: Nominal vs IPCA Correction -->
+    <div class="currency-mode-bar">
+      <div class="mode-toggle-group">
+        <button class="mode-toggle-btn active" id="btn-mode-nominal" data-mode="nominal" type="button">
+          <span>💵</span> Valores Nominais
+        </button>
+        <button class="mode-toggle-btn" id="btn-mode-ipca" data-mode="ipca" type="button">
+          <span>📈</span> Corrigido IPCA (2026)
+          <span class="mode-badge-rec">OFICIAL</span>
+        </button>
+      </div>
+      <div class="mode-hint-text" id="mode-hint-text">
+        Exibindo valores históricos nominais registrados na data de cada despesa.
+      </div>
+    </div>
+
     <!-- Presidential 3D Credit Card -->
     <section class="card-section">
       <div class="credit-card-3d-wrap">
@@ -86,10 +102,26 @@
           <div class="card-balance-display">
             <div class="card-balance-label">
               <span class="material-symbols-outlined" style="font-size: 14px;">credit_card</span>
-              Fatura Acumulada no Cartão Corporativo
+              <span id="card-balance-mode-label">Fatura Acumulada no Cartão Corporativo</span>
             </div>
             <div class="card-balance-amount" id="card-balance-val">
               R$ 142.780.912<span class="cents">,45</span>
+            </div>
+            <div class="card-averages-row" id="card-averages-wrap">
+              <div class="avg-stat-item">
+                <span class="avg-stat-title">Média Mensal</span>
+                <span class="avg-stat-val" id="card-monthly-avg">R$ 513.596/mês</span>
+              </div>
+              <div class="avg-stat-divider"></div>
+              <div class="avg-stat-item">
+                <span class="avg-stat-title">Média Diária</span>
+                <span class="avg-stat-val" id="card-daily-avg">R$ 16.877/dia</span>
+              </div>
+              <div class="avg-stat-divider"></div>
+              <div class="avg-stat-item">
+                <span class="avg-stat-title">Período</span>
+                <span class="avg-stat-val" id="card-duration-val">278 meses</span>
+              </div>
             </div>
           </div>
 
@@ -121,11 +153,35 @@
         </div>
         <span>Categorias</span>
       </div>
+      <div class="action-card-btn" id="action-companies">
+        <div class="action-icon-wrap">
+          <span class="material-symbols-outlined">store</span>
+        </div>
+        <span>Top Empresas</span>
+      </div>
+      <div class="action-card-btn" id="action-expensive-days">
+        <div class="action-icon-wrap">
+          <span class="material-symbols-outlined">calendar_month</span>
+        </div>
+        <span>Dias Recordes</span>
+      </div>
+      <div class="action-card-btn" id="action-duel">
+        <div class="action-icon-wrap">
+          <span class="material-symbols-outlined">swords</span>
+        </div>
+        <span>Duelo</span>
+      </div>
+      <div class="action-card-btn" id="action-quiz">
+        <div class="action-icon-wrap">
+          <span class="material-symbols-outlined">quiz</span>
+        </div>
+        <span>Quiz</span>
+      </div>
       <div class="action-card-btn" id="action-rankings">
         <div class="action-icon-wrap">
           <span class="material-symbols-outlined">trophy</span>
         </div>
-        <span>Top Recordes</span>
+        <span>Curiosidades</span>
       </div>
       <div class="action-card-btn" id="action-calculator">
         <div class="action-icon-wrap">
@@ -141,11 +197,31 @@
       </div>
     </div>
 
-    <!-- Feed Controls (Search & Category Pills) -->
+    <!-- Feed Controls (Search, State/UF & Category Pills) -->
     <div class="feed-controls">
-      <div class="search-input-wrap">
-        <span class="material-symbols-outlined">search</span>
-        <input type="text" id="feed-search" class="feed-search-input" placeholder="Buscar por padaria, posto, hotel, cidade ou CNPJ...">
+      <div class="search-and-uf-wrap">
+        <div class="search-input-wrap">
+          <span class="material-symbols-outlined">search</span>
+          <input type="text" id="feed-search" class="feed-search-input" placeholder="Buscar por padaria, posto, hotel, cidade ou CNPJ...">
+        </div>
+        <div class="uf-select-wrap">
+          <select id="feed-uf-filter" class="feed-uf-select">
+            <option value="all">📍 Todas as UFs (Brasil)</option>
+            <option value="DF">DF - Distrito Federal</option>
+            <option value="SP">SP - São Paulo</option>
+            <option value="RJ">RJ - Rio de Janeiro</option>
+            <option value="BA">BA - Bahia</option>
+            <option value="RS">RS - Rio Grande do Sul</option>
+            <option value="PR">PR - Paraná</option>
+            <option value="SC">SC - Santa Catarina</option>
+            <option value="MG">MG - Minas Gerais</option>
+            <option value="PE">PE - Pernambuco</option>
+            <option value="CE">CE - Ceará</option>
+            <option value="AM">AM - Amazonas</option>
+            <option value="PA">PA - Pará</option>
+            <option value="RN">RN - Rio Grande do Norte</option>
+          </select>
+        </div>
       </div>
 
       <div class="category-tags-scroll">
@@ -280,6 +356,96 @@
     </div>
   </div>
 
+  <!-- Modal: Top Empresas Favorecidas -->
+  <div class="modal-overlay" id="modal-companies">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2><span>🏢</span> Top 10 Empresas Favorecidas</h2>
+        <button class="btn-close-modal" type="button">×</button>
+      </div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 14px;">
+        Fornecedores e redes que mais faturaram com o Cartão Corporativo Presidencial na série histórica (2003–2026):
+      </div>
+      <div id="modal-companies-list" style="display: flex; flex-direction: column; gap: 10px;">
+        <!-- Injetado dinamicamente via app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: 10 Dias Mais Caros da República -->
+  <div class="modal-overlay" id="modal-expensive-days">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2><span>🗓️</span> 10 Dias Mais Caros da História</h2>
+        <button class="btn-close-modal" type="button">×</button>
+      </div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 14px;">
+        Os maiores picos de despesa concentrada em um único dia por governos da República:
+      </div>
+      <div id="modal-expensive-days-list" style="display: flex; flex-direction: column; gap: 10px;">
+        <!-- Injetado dinamicamente via app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Duelo de Mandatos -->
+  <div class="modal-overlay" id="modal-duel">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2><span>⚔️</span> Duelo de Mandatos Presidenciais</h2>
+        <button class="btn-close-modal" type="button">×</button>
+      </div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">
+        Compare lado a lado o desempenho e gastos de dois governos com rigor estatístico:
+      </div>
+      <div class="duel-selectors">
+        <select id="duel-select-a" class="duel-select">
+          <option value="lula1_2" selected>Lula (2003–2010)</option>
+          <option value="bolsonaro">Bolsonaro (2019–2022)</option>
+          <option value="dilma">Dilma (2011–2016)</option>
+          <option value="temer">Temer (2016–2018)</option>
+          <option value="lula3">Lula (2023–2026)</option>
+        </select>
+        <div style="font-weight: 900; font-size: 14px; color: var(--nu-purple-light); padding: 0 4px;">VS</div>
+        <select id="duel-select-b" class="duel-select">
+          <option value="bolsonaro" selected>Bolsonaro (2019–2022)</option>
+          <option value="lula1_2">Lula (2003–2010)</option>
+          <option value="dilma">Dilma (2011–2016)</option>
+          <option value="temer">Temer (2016–2018)</option>
+          <option value="lula3">Lula (2023–2026)</option>
+        </select>
+      </div>
+      <div id="duel-comparison-content" class="duel-grid">
+        <!-- Injetado dinamicamente via app.js -->
+      </div>
+      <div style="margin-top: 14px;">
+        <button id="btn-share-duel-wa" class="btn-share-wa" type="button" style="width: 100%;">
+          <span>💬</span> Mandar Comparativo no WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Quiz do Contribuinte -->
+  <div class="modal-overlay" id="modal-quiz">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2><span>🎯</span> Quiz do Contribuinte</h2>
+        <button class="btn-close-modal" type="button">×</button>
+      </div>
+      <div class="quiz-header-status">
+        <span id="quiz-progress-text">Pergunta 1 de 5</span>
+        <span id="quiz-score-badge" style="color: var(--accent-amber); font-weight: 800;">Pontos: 0</span>
+      </div>
+      <div class="quiz-progress-bar">
+        <div id="quiz-progress-fill" class="quiz-progress-fill" style="width: 20%;"></div>
+      </div>
+      <div id="quiz-card-content">
+        <!-- Injetado dinamicamente via app.js -->
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: Calculadora do Cidadão -->
   <div class="modal-overlay" id="modal-calculator">
     <div class="modal-container">
@@ -287,15 +453,29 @@
         <h2><span>⚖️</span> Calculadora do Cidadão</h2>
         <button class="btn-close-modal" type="button">×</button>
       </div>
-      <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">
-        Descubra quanto tempo da sua vida de trabalho seria necessário para pagar a fatura do mandato selecionado:
+      <div class="calc-tabs">
+        <button type="button" class="calc-tab-btn active" id="btn-calc-tab-salary">💼 Meu Salário</button>
+        <button type="button" class="calc-tab-btn" id="btn-calc-tab-services">🏥 Serviços Públicos</button>
       </div>
-      <div class="calc-input-group">
-        <label for="calc-salary-input">Seu Salário Mensal Líquido (R$):</label>
-        <input type="number" id="calc-salary-input" class="calc-input" placeholder="Ex: 3000" value="3000">
+      <div id="calc-view-salary">
+        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">
+          Descubra quanto tempo da sua vida de trabalho seria necessário para pagar a fatura do mandato selecionado:
+        </div>
+        <div class="calc-input-group">
+          <label for="calc-salary-input">Seu Salário Mensal Líquido (R$):</label>
+          <input type="number" id="calc-salary-input" class="calc-input" placeholder="Ex: 3000" value="3000">
+        </div>
+        <div id="calc-live-result" style="background: rgba(0,0,0,0.5); border: 1px solid var(--border-glass); border-radius: 10px; padding: 14px; font-size: 12px; color: #fff; line-height: 1.5;">
+          <!-- Injetado dinamicamente -->
+        </div>
       </div>
-      <div id="calc-live-result" style="background: rgba(0,0,0,0.5); border: 1px solid var(--border-glass); border-radius: 10px; padding: 14px; font-size: 12px; color: #fff; line-height: 1.5;">
-        <!-- Injetado dinamicamente -->
+      <div id="calc-view-services" style="display: none;">
+        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">
+          O que a fatura do mandato selecionado construiria ou financiaria em serviços públicos essenciais:
+        </div>
+        <div id="calc-services-result" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <!-- Injetado dinamicamente -->
+        </div>
       </div>
     </div>
   </div>

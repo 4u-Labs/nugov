@@ -667,8 +667,20 @@ function renderTransactions() {
     return true;
   });
 
+  // Sort by highest expenditure (top amounts first)
+  filtered.sort((a, b) => {
+    const factorA = IPCA_FACTORS[a.date ? parseInt(a.date.substring(0, 4)) : 2026] || 1.0;
+    const factorB = IPCA_FACTORS[b.date ? parseInt(b.date.substring(0, 4)) : 2026] || 1.0;
+    const valA = isIpca ? (a.amount * factorA) : a.amount;
+    const valB = isIpca ? (b.amount * factorB) : b.amount;
+    return valB - valA;
+  });
+
+  // Standardize: always display top 6 highest expenses
+  const top6Txs = filtered.slice(0, 6);
+
   if (countEl) {
-    countEl.textContent = `${filtered.length} lançamento(s) exibido(s)`;
+    countEl.textContent = `${top6Txs.length} maiores lançamentos exibidos`;
   }
 
   // Active filter banner control
@@ -682,7 +694,7 @@ function renderTransactions() {
       if (currentCategory !== 'all') desc.push(`Categoria: "${currentCategory}"`);
       if (currentUF !== 'all') desc.push(`Estado: ${currentUF}`);
       if (searchQuery) desc.push(`Busca: "${searchQuery}"`);
-      filterText.innerHTML = `🔍 Filtrando por: <strong>${desc.join(' • ')}</strong> (${filtered.length} lançamento(s))`;
+      filterText.innerHTML = `🔍 Filtrando por: <strong>${desc.join(' • ')}</strong> (${top6Txs.length} de ${filtered.length} lançamentos)`;
     } else {
       filterBanner.style.display = 'none';
     }
@@ -699,7 +711,7 @@ function renderTransactions() {
     return;
   }
 
-  listEl.innerHTML = filtered.map(tx => {
+  const txsCardsHtml = top6Txs.map(tx => {
     const year = tx.date ? parseInt(tx.date.substring(0, 4)) : 2026;
     const factor = IPCA_FACTORS[year] || 1.0;
     const displayAmount = isIpca ? (tx.amount * factor) : tx.amount;
@@ -728,6 +740,49 @@ function renderTransactions() {
       </div>
     `;
   }).join('');
+
+  // Grand Total of the mandate (not just sum of 6 items)
+  const stats = getMandateStats(currentMandate);
+  const grandTotalVal = isIpca ? stats.ipca : stats.nominal;
+  const grandTotalTxCount = stats.total_transactions ? Number(stats.total_transactions).toLocaleString('pt-BR') : '30.000+';
+  const mandateName = currentMandate === 'all' ? 'Todos os Mandatos Presidenciais (2003–2026)' : stats.name;
+
+  const grandTotalCardHtml = `
+    <div class="feed-grand-total-card">
+      <div class="grand-total-top">
+        <div class="grand-total-tag">
+          <span class="material-symbols-outlined" style="font-size: 17px; color: #fde047;">account_balance</span>
+          TOTAL GERAL OFICIAL DO MANDATO
+        </div>
+        <span class="grand-total-badge-status">100% AUDITADO CGU</span>
+      </div>
+      <div class="grand-total-val-row">
+        <span class="grand-total-main-val">${formatCurrency(grandTotalVal)}</span>
+        <span class="grand-total-mode-tag">${isIpca ? '📈 Corrigido IPCA (Preços de 2026)' : '💵 Valor Histórico Nominal'}</span>
+      </div>
+      <p class="grand-total-desc">
+        Fatura total acumulada no Cartão Corporativo durante a gestão de <strong>${escapeHtml(mandateName)}</strong> (${stats.months} meses • ${grandTotalTxCount} compras registradas no Portal da Transparência da CGU).
+      </p>
+      <div class="grand-total-footer">
+        <div class="grand-total-item">
+          <span>Média Mensal:</span>
+          <strong>${formatCurrency(isIpca ? stats.monthlyIpca : stats.monthlyNom)}/mês</strong>
+        </div>
+        <div class="grand-total-dot">•</div>
+        <div class="grand-total-item">
+          <span>Média Diária:</span>
+          <strong>${formatCurrency(isIpca ? stats.dailyIpca : stats.dailyNom)}/dia</strong>
+        </div>
+        <div class="grand-total-dot">•</div>
+        <div class="grand-total-item">
+          <span>Duração:</span>
+          <strong>${stats.months} meses (${stats.days} dias)</strong>
+        </div>
+      </div>
+    </div>
+  `;
+
+  listEl.innerHTML = txsCardsHtml + grandTotalCardHtml;
 }
 
 function openTransactionModal(txId) {

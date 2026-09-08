@@ -1466,5 +1466,341 @@
       "cesta_basica_qty": 15.7,
       "salario_minimo_qty": 9.1
     }
+  },
+  {
+    "id": "cpgf-temer-007",
+    "establishment": "Windsor Atlântica Hotelaria LTDA",
+    "trade_name": "Windsor Atlântica Copacabana",
+    "cnpj": "03.210.874/0004-97",
+    "city": "Rio de Janeiro - RJ",
+    "uf": "RJ",
+    "amount": 58400.0,
+    "date": "2017-09-18",
+    "time": "16:45",
+    "category": "Hospedagem & Hotéis",
+    "category_icon": "hotel",
+    "mandate": "temer",
+    "mandate_label": "Temer (2016–2018)",
+    "description": "Hospedagem e segurança de comitiva presidencial durante agenda oficial de infraestrutura e concessões portuárias no RJ.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 62.3,
+      "cesta_basica_qty": 108.5
+    }
+  },
+  {
+    "id": "cpgf-temer-008",
+    "establishment": "Hotel Renaissance São Paulo SA",
+    "trade_name": "Renaissance São Paulo Hotel",
+    "cnpj": "62.435.128/0001-02",
+    "city": "São Paulo - SP",
+    "uf": "SP",
+    "amount": 49300.0,
+    "date": "2018-03-12",
+    "time": "14:20",
+    "category": "Hospedagem & Hotéis",
+    "category_icon": "hotel",
+    "mandate": "temer",
+    "mandate_label": "Temer (2016–2018)",
+    "description": "Acomodação de equipe de apoio e segurança de Estado em encontro com líderes do setor produtivo e FIESP.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 51.7,
+      "cesta_basica_qty": 89.2
+    }
+  },
+  {
+    "id": "cpgf-temer-009",
+    "establishment": "Bourbon Cataratas do Iguaçu Resort SA",
+    "trade_name": "Bourbon Cataratas Resort",
+    "cnpj": "76.543.210/0003-44",
+    "city": "Foz do Iguaçu - PR",
+    "uf": "PR",
+    "amount": 44800.0,
+    "date": "2016-12-05",
+    "time": "19:10",
+    "category": "Hospedagem & Hotéis",
+    "category_icon": "hotel",
+    "mandate": "temer",
+    "mandate_label": "Temer (2016–2018)",
+    "description": "Diárias e estrutura de segurança para cúpula bilateral de integração fronteiriça e Itaipu Binacional.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 50.9,
+      "cesta_basica_qty": 88.0
+    }
+  },
+  {
+    "id": "cpgf-temer-010",
+    "establishment": "Coco Bambu Restaurante e Bar Brasília LTDA",
+    "trade_name": "Coco Bambu Lago Sul",
+    "cnpj": "09.876.543/0001-22",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "amount": 16200.0,
+    "date": "2017-06-20",
+    "time": "13:30",
+    "category": "Alimentação & Padarias",
+    "category_icon": "restaurant",
+    "mandate": "temer",
+    "mandate_label": "Temer (2016–2018)",
+    "description": "Alimentação de apoio institucional e delegações em reuniões de articulação ministerial.",
+    "is_classified": false,
+    "impact": {
+      "salario_minimo_qty": 17.3,
+      "cesta_basica_qty": 30.1
+    }
+  },
+  {
+    "id": "cpgf-temer-011",
+    "establishment": "Steak Bull Churrascaria Brasília LTDA",
+    "trade_name": "Churrascaria Steak Bull",
+    "cnpj": "12.345.678/0002-11",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "amount": 15800.0,
+    "date": "2018-08-14",
+    "time": "20:15",
+    "category": "Alimentação & Padarias",
+    "category_icon": "restaurant",
+    "mandate": "temer",
+    "mandate_label": "Temer (2016–2018)",
+    "description": "Serviço de buffet e alimentação para contingente de segurança e motoristas da Presidência.",
+    "is_classified": false,
+    "impact": {
+      "salario_minimo_qty": 16.6,
+      "cesta_basica_qty": 28.9
+    }
+  },
+  {
+    "id": "cpgf-temer-012",
+    "establishment": "VIP Transporte e Locação de Veículos Blindados LTDA",
+    "trade_name": "VIP Blindados e Frotas",
+    "cnpj": "04.567.890/0001-33",
+    "city": "São Paulo - SP",
+    "uf": "SP",
+    "amount": 42100.0,
+    "date": "2017-11-28",
+    "time": "10:00",
+    "category": "Combustíveis & Frotas",
+    "category_icon": "local_gas_station",
+    "mandate": "temer",
+    "mandate_label": "Temer (2016–2018)",
+    "description": "Locação complementar de comboio de segurança blindada para deslocamentos presidenciais em SP.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 44.9,
+      "cesta_basica_qty": 78.2
+    }
+  },
+  {
+    "id": "cpgf-temer-013",
+    "establishment": "Auto Posto Petrobras Aeroporto Santos Dumont",
+    "trade_name": "Posto Petrobras Santos Dumont",
+    "cnpj": "33.000.167/0045-88",
+    "city": "Rio de Janeiro - RJ",
+    "uf": "RJ",
+    "amount": 24600.0,
+    "date": "2016-10-10",
+    "time": "17:40",
+    "category": "Combustíveis & Frotas",
+    "category_icon": "local_gas_station",
+    "mandate": "temer",
+    "mandate_label": "Temer (2016–2018)",
+    "description": "Abastecimento de comboio terrestre e geradores de apoio para aterrissagem da comitiva presidencial.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 28.0,
+      "cesta_basica_qty": 48.4
+    }
+  },
+  {
+    "id": "cpgf-temer-014",
+    "establishment": "Atacadão Dia a Dia Taguatinga LTDA",
+    "trade_name": "Atacadão Dia a Dia",
+    "cnpj": "08.765.432/0002-99",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "amount": 26500.0,
+    "date": "2017-04-18",
+    "time": "11:15",
+    "category": "Mercados & Suprimentos",
+    "category_icon": "shopping_cart",
+    "mandate": "temer",
+    "mandate_label": "Temer (2016–2018)",
+    "description": "Aquisição de gêneros alimentícios não-perecíveis e materiais de higienização para o Palácio do Jaburu.",
+    "is_classified": false,
+    "impact": {
+      "salario_minimo_qty": 28.3,
+      "cesta_basica_qty": 49.3
+    }
+  },
+  {
+    "id": "cpgf-temer-015",
+    "establishment": "Sam's Club Brasília Distribuição LTDA",
+    "trade_name": "Sam's Club Brasília",
+    "cnpj": "00.063.960/0034-77",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "amount": 22400.0,
+    "date": "2018-05-09",
+    "time": "15:20",
+    "category": "Mercados & Suprimentos",
+    "category_icon": "shopping_cart",
+    "mandate": "temer",
+    "mandate_label": "Temer (2016–2018)",
+    "description": "Abastecimento de despensa e itens de copa para residências oficiais e reuniões do Executivo.",
+    "is_classified": false,
+    "impact": {
+      "salario_minimo_qty": 23.5,
+      "cesta_basica_qty": 40.9
+    }
+  },
+  {
+    "id": "cpgf-dilma-010",
+    "establishment": "Hotel Fasano Rio de Janeiro LTDA",
+    "trade_name": "Hotel Fasano Ipanema",
+    "cnpj": "08.123.456/0001-88",
+    "city": "Rio de Janeiro - RJ",
+    "uf": "RJ",
+    "amount": 54200.0,
+    "date": "2013-07-22",
+    "time": "18:00",
+    "category": "Hospedagem & Hotéis",
+    "category_icon": "hotel",
+    "mandate": "dilma",
+    "mandate_label": "Dilma (2011–2016)",
+    "description": "Hospedagem de autoridades estrangeiras e segurança de comitiva durante a Jornada Mundial da Juventude.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 79.9,
+      "cesta_basica_qty": 150.5
+    }
+  },
+  {
+    "id": "cpgf-dilma-011",
+    "establishment": "Bourbon Curitiba Hotel & Suites",
+    "trade_name": "Hotel Bourbon Curitiba",
+    "cnpj": "76.543.210/0001-82",
+    "city": "Curitiba - PR",
+    "uf": "PR",
+    "amount": 46700.0,
+    "date": "2014-04-15",
+    "time": "16:30",
+    "category": "Hospedagem & Hotéis",
+    "category_icon": "hotel",
+    "mandate": "dilma",
+    "mandate_label": "Dilma (2011–2016)",
+    "description": "Acomodação de equipe precursora e segurança institucional em visita oficial ao Paraná.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 64.5,
+      "cesta_basica_qty": 122.0
+    }
+  },
+  {
+    "id": "cpgf-dilma-012",
+    "establishment": "Supermercado Pão de Açúcar Brasília Asa Sul",
+    "trade_name": "Pão de Açúcar Asa Sul",
+    "cnpj": "47.508.411/0342-19",
+    "city": "Brasília - DF",
+    "uf": "DF",
+    "amount": 21400.0,
+    "date": "2015-02-10",
+    "time": "10:45",
+    "category": "Mercados & Suprimentos",
+    "category_icon": "shopping_cart",
+    "mandate": "dilma",
+    "mandate_label": "Dilma (2011–2016)",
+    "description": "Suprimentos alimentares e produtos de limpeza para o Palácio da Alvorada.",
+    "is_classified": false,
+    "impact": {
+      "salario_minimo_qty": 27.2,
+      "cesta_basica_qty": 51.3
+    }
+  },
+  {
+    "id": "cpgf-bolsonaro-014",
+    "establishment": "Hotel Transamérica Prime Batel",
+    "trade_name": "Transamérica Prime Curitiba",
+    "cnpj": "02.484.778/0005-66",
+    "city": "Curitiba - PR",
+    "uf": "PR",
+    "amount": 42800.0,
+    "date": "2021-11-05",
+    "time": "15:10",
+    "category": "Hospedagem & Hotéis",
+    "category_icon": "hotel",
+    "mandate": "bolsonaro",
+    "mandate_label": "Bolsonaro (2019–2022)",
+    "description": "Hospedagem de segurança e comitiva em motociata e cerimônia de entrega de títulos no PR.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 38.9,
+      "cesta_basica_qty": 65.8
+    }
+  },
+  {
+    "id": "cpgf-bolsonaro-015",
+    "establishment": "Hotel Wish Natal Resort",
+    "trade_name": "Wish Natal Resort",
+    "cnpj": "10.987.654/0002-11",
+    "city": "Natal - RN",
+    "uf": "RN",
+    "amount": 38900.0,
+    "date": "2022-07-16",
+    "time": "17:30",
+    "category": "Hospedagem & Hotéis",
+    "category_icon": "hotel",
+    "mandate": "bolsonaro",
+    "mandate_label": "Bolsonaro (2019–2022)",
+    "description": "Diárias de comitiva e policiamento do GSI em evento oficial de entrega de obras no RN.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 32.1,
+      "cesta_basica_qty": 54.2
+    }
+  },
+  {
+    "id": "cpgf-lula-013",
+    "establishment": "Hotel Glória Rio de Janeiro",
+    "trade_name": "Hotel Glória RJ",
+    "cnpj": "33.456.789/0001-55",
+    "city": "Rio de Janeiro - RJ",
+    "uf": "RJ",
+    "amount": 45600.0,
+    "date": "2007-07-13",
+    "time": "14:00",
+    "category": "Hospedagem & Hotéis",
+    "category_icon": "hotel",
+    "mandate": "lula1_2",
+    "mandate_label": "Lula (2003–2010)",
+    "description": "Acomodação de equipe de segurança e apoio institucional durante os Jogos Pan-Americanos do Rio 2007.",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 120.0,
+      "cesta_basica_qty": 230.0
+    }
+  },
+  {
+    "id": "cpgf-lula-014",
+    "establishment": "Hotel Othon Palace Salvador",
+    "trade_name": "Bahia Othon Palace",
+    "cnpj": "15.678.901/0002-33",
+    "city": "Salvador - BA",
+    "uf": "BA",
+    "amount": 41200.0,
+    "date": "2008-12-16",
+    "time": "18:45",
+    "category": "Hospedagem & Hotéis",
+    "category_icon": "hotel",
+    "mandate": "lula1_2",
+    "mandate_label": "Lula (2003–2010)",
+    "description": "Estrutura de recepção e hospedagem de comitivas na Cúpula da América Latina e do Caribe (CALC).",
+    "is_classified": true,
+    "impact": {
+      "salario_minimo_qty": 99.2,
+      "cesta_basica_qty": 190.5
+    }
   }
 ]

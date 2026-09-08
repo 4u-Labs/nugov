@@ -783,3 +783,105 @@ body {
   font-size: 11px;
   color: var(--text-muted);
 }
+
+/* ── IMPOSTÔMETRO NACIONAL EM TEMPO REAL ── */
+.impostometro-top-bar {
+  background: linear-gradient(90deg, #1b072e 0%, #0d0417 50%, #1b072e 100%);
+  border-bottom: 1px solid rgba(155, 59, 238, 0.3);
+  padding: 8px 0;
+  font-size: 11.5px;
+  cursor: pointer;
+  position: relative;
+  z-index: 101;
+  transition: background 0.2s;
+}
+
+.impostometro-top-bar:hover {
+  background: linear-gradient(90deg, #24093e 0%, #140724 50%, #24093e 100%);
+}
+
+.impostometro-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.imposto-badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(244, 63, 94, 0.2);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  color: #fb7185;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f43f5e;
+  box-shadow: 0 0 8px #f43f5e;
+  animation: livePulse 1.2s infinite ease-in-out;
+}
+
+@keyframes livePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.4; }
+}
+
+.imposto-text-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.imposto-label {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.imposto-counter-val {
+  color: var(--accent-green);
+  font-weight: 800;
+  font-family: monospace, var(--font-family);
+  font-size: 13.5px;
+  letter-spacing: 0.3px;
+  text-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.imposto-speed {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.imposto-btn-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--nu-purple-light);
+  font-weight: 700;
+  font-size: 11px;
+}
+
+@media (max-width: 600px) {
+  .imposto-speed, .imposto-btn-info {
+    display: none;
+  }
+  .imposto-text-wrap {
+    font-size: 10.5px;
+    justify-content: flex-start;
+  }
+  .imposto-counter-val {
+    font-size: 12px;
+  }
+}

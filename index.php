@@ -17,6 +17,25 @@
 <body>
   <div class="bg-glow-mesh"></div>
 
+  <!-- Top Bar: Impostômetro Nacional em Tempo Real -->
+  <div class="impostometro-top-bar" onclick="openModal('modal-impostometro')" title="Clique para ver o que daria para pagar com esses impostos">
+    <div class="container">
+      <div class="impostometro-content">
+        <div class="imposto-badge-live">
+          <span class="live-dot"></span> AO VIVO
+        </div>
+        <div class="imposto-text-wrap">
+          <span class="imposto-label">🇧🇷 Impostômetro Nacional <?php echo date('Y'); ?>:</span>
+          <span id="impostometro-live-counter" class="imposto-counter-val">Carregando...</span>
+          <span class="imposto-speed">(+R$ 120.490/seg)</span>
+        </div>
+        <div class="imposto-btn-info">
+          <span>Ver Impacto</span> ➔
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Header -->
   <header class="nugov-header">
     <div class="container">
@@ -298,6 +317,60 @@
         <input type="text" id="nubot-input" class="calc-input" placeholder="Pergunte algo ao NuBot..." style="flex: 1;">
         <button type="submit" style="background: var(--nu-purple); border: none; color: #fff; padding: 0 16px; border-radius: 8px; cursor: pointer; font-weight: 700;">Enviar</button>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal: Impostômetro Nacional Detalhes -->
+  <div class="modal-overlay" id="modal-impostometro">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2><span>🇧🇷</span> Impostômetro Nacional <?php echo date('Y'); ?></h2>
+        <button class="btn-close-modal" type="button">×</button>
+      </div>
+
+      <div style="background: rgba(130, 10, 209, 0.15); border: 1px solid var(--nu-purple); border-radius: 14px; padding: 18px; text-align: center; margin-bottom: 16px;">
+        <span style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); font-weight: 700; letter-spacing: 0.5px; display: block; margin-bottom: 4px;">
+          Total Pago em Impostos no Brasil até este Segundo:
+        </span>
+        <div id="modal-impostometro-live-val" style="font-size: 26px; font-weight: 900; color: var(--accent-green); font-family: monospace, sans-serif; text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);">
+          Carregando...
+        </div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+          Ritmo estimado: <strong>+R$ 120.497,21</strong> a cada segundo
+        </div>
+      </div>
+
+      <div style="font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 8px;">
+        💡 O que esse valor arrecadado pagaria hoje?
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px;">
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; padding: 12px; text-align: center;">
+          <span style="font-size: 22px; display: block; margin-bottom: 2px;">🚑</span>
+          <div id="imp-ambulancias" style="font-size: 16px; font-weight: 800; color: var(--accent-amber);">...</div>
+          <span style="font-size: 10.5px; color: var(--text-secondary);">Ambulâncias UTI</span>
+        </div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; padding: 12px; text-align: center;">
+          <span style="font-size: 22px; display: block; margin-bottom: 2px;">🏫</span>
+          <div id="imp-escolas" style="font-size: 16px; font-weight: 800; color: var(--accent-green);">...</div>
+          <span style="font-size: 10.5px; color: var(--text-secondary);">Escolas Padrão FNDE</span>
+        </div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; padding: 12px; text-align: center;">
+          <span style="font-size: 22px; display: block; margin-bottom: 2px;">🥗</span>
+          <div id="imp-cestas" style="font-size: 16px; font-weight: 800; color: var(--accent-cyan);">...</div>
+          <span style="font-size: 10.5px; color: var(--text-secondary);">Cestas Básicas</span>
+        </div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; padding: 12px; text-align: center;">
+          <span style="font-size: 22px; display: block; margin-bottom: 2px;">💳</span>
+          <div id="imp-tempo-cartao" style="font-size: 16px; font-weight: 800; color: var(--nu-purple-light);">...</div>
+          <span style="font-size: 10.5px; color: var(--text-secondary);">Para pagar 20 anos de Cartão Corporativo</span>
+        </div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 10px; padding: 12px; font-size: 11px; color: var(--text-secondary); line-height: 1.5;">
+        <strong style="color: #fff;">📊 Metodologia & Fontes Oficiais:</strong><br>
+        O cálculo utiliza a série histórica e relatórios da <strong>Receita Federal do Brasil</strong>, <strong>Secretaria do Tesouro Nacional (STN)</strong>, <strong>CONFAZ</strong> e apurações do <strong>IBPT</strong> para tributos federais, estaduais e municipais.
+      </div>
     </div>
   </div>
 

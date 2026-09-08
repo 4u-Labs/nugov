@@ -23,6 +23,7 @@ function formatDate(dateStr) {
 document.addEventListener('DOMContentLoaded', async () => {
   await loadData();
   setupEventListeners();
+  setupImpostometro();
   renderApp();
 });
 
@@ -367,6 +368,59 @@ function handleNuBotChat(e) {
     chatBox.appendChild(botMsg);
     chatBox.scrollTop = chatBox.scrollHeight;
   }, 400);
+}
+
+function setupImpostometro() {
+  const counterEl = document.getElementById('impostometro-live-counter');
+  const modalValEl = document.getElementById('modal-impostometro-live-val');
+  const ambulanciasEl = document.getElementById('imp-ambulancias');
+  const escolasEl = document.getElementById('imp-escolas');
+  const cestasEl = document.getElementById('imp-cestas');
+  const cartaoTempoEl = document.getElementById('imp-tempo-cartao');
+
+  // Arrecadação anual brasileira (Federal + Estadual + Municipal): ~R$ 3.820.000.000.000,00
+  const ANNUAL_TARGET = 3820000000000;
+  const MS_IN_YEAR = 365.25 * 24 * 60 * 60 * 1000;
+  const RATE_PER_MS = ANNUAL_TARGET / MS_IN_YEAR;
+
+  const currentYear = new Date().getFullYear();
+  const startOfYear = new Date(currentYear, 0, 1, 0, 0, 0).getTime();
+
+  function update() {
+    const now = Date.now();
+    const elapsedMs = Math.max(0, now - startOfYear);
+    const totalCollected = elapsedMs * RATE_PER_MS;
+    const formatted = totalCollected.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    if (counterEl) counterEl.textContent = formatted;
+    if (modalValEl) modalValEl.textContent = formatted;
+
+    // Equivalências ao vivo
+    if (ambulanciasEl) {
+      const amb = Math.floor(totalCollected / 300000); // R$ 300k por ambulância UTI
+      ambulanciasEl.textContent = Number(amb).toLocaleString('pt-BR');
+    }
+    if (escolasEl) {
+      const esc = Math.floor(totalCollected / 8000000); // R$ 8M por escola padrão FNDE
+      escolasEl.textContent = Number(esc).toLocaleString('pt-BR');
+    }
+    if (cestasEl) {
+      const ces = Math.floor(totalCollected / 750); // R$ 750 por cesta básica
+      cestasEl.textContent = Number(ces).toLocaleString('pt-BR');
+    }
+    if (cartaoTempoEl) {
+      // Quanto tempo de arrecadação paga todos os 20 anos de cartões presidenciais (R$ 142.7M)?
+      // R$ 142.780.912 / R$ 120.490 por segundo = ~1.185 segundos = ~19.7 minutos
+      const totalCards = 142780912;
+      const secondsNeeded = Math.ceil(totalCards / (RATE_PER_MS * 1000));
+      const minutesNeeded = (secondsNeeded / 60).toFixed(1);
+      cartaoTempoEl.textContent = `${minutesNeeded} minutos`;
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  update();
 }
 
 function escapeHtml(str) {

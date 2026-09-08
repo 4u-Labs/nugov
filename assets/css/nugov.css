@@ -1681,3 +1681,204 @@ body {
   color: #fff;
 }
 
+/* =========================================================
+   SHARE HUB & SOCIAL PREVIEW STYLES
+   ========================================================= */
+.share-preview-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(13, 8, 26, 0.85);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.share-preview-thumb {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(139, 16, 230, 0.4);
+}
+
+.share-preview-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.share-preview-info {
+  flex: 1;
+}
+
+.share-preview-info h4 {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 3px;
+  line-height: 1.25;
+}
+
+.share-preview-info p {
+  font-size: 11px;
+  color: #cbd5e1;
+  line-height: 1.35;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.share-preview-domain {
+  font-size: 10px;
+  color: var(--nu-purple-light);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.share-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 480px) {
+  .share-buttons-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.btn-share-channel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(255, 255, 255, 0.04);
+  text-align: left;
+}
+
+.btn-share-channel:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+}
+
+.btn-share-channel .share-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.btn-share-channel .share-btn-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-share-channel .share-btn-text strong {
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.btn-share-channel .share-btn-text small {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.btn-share-channel.btn-share-wa {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.22) 0%, rgba(37, 211, 102, 0.08) 100%);
+  border-color: rgba(37, 211, 102, 0.45);
+}
+
+.btn-share-channel.btn-share-tg {
+  background: linear-gradient(135deg, rgba(0, 136, 204, 0.22) 0%, rgba(0, 136, 204, 0.08) 100%);
+  border-color: rgba(0, 136, 204, 0.45);
+}
+
+.btn-share-channel.btn-share-x-dark {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.btn-share-channel.btn-share-copy {
+  background: linear-gradient(135deg, rgba(139, 16, 230, 0.25) 0%, rgba(139, 16, 230, 0.08) 100%);
+  border-color: rgba(192, 132, 252, 0.4);
+}
+
+.share-extras-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+@media (max-width: 520px) {
+  .share-extras-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.share-qr-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.share-qr-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  padding: 6px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.share-qr-wrap span {
+  font-size: 9.5px;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 100px;
+  line-height: 1.2;
+}
+
+.share-story-wrap {
+  flex: 1;
+}
+
+.share-story-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.btn-share-header {
+  color: #fff;
+  transition: all 0.2s;
+}
+
+.btn-share-header:hover {
+  background: rgba(139, 16, 230, 0.3);
+  box-shadow: 0 0 12px var(--nu-purple-glow);
+}
+

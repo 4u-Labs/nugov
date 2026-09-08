@@ -10,6 +10,19 @@
   <meta name="description" content="O extrato interativo do cartão corporativo presidencial brasileiro. Transparência pública em formato fintech.">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#820ad1">
+
+  <!-- Open Graph & Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://4u.ia.br/app/nugov/">
+  <meta property="og:title" content="NuGov — O Extrato da República">
+  <meta property="og:description" content="O extrato que o contribuinte paga todo mês. Descubra os gastos reais do Cartão Corporativo Presidencial (2003–2026) auditados pela CGU.">
+  <meta property="og:image" content="https://4u.ia.br/app/nugov/assets/img/app-logo-256.png">
+  <meta property="og:site_name" content="NuGov">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NuGov — O Extrato da República">
+  <meta name="twitter:description" content="O extrato que o contribuinte paga todo mês. Cartão Corporativo Presidencial em formato fintech com dados oficiais da CGU.">
+  <meta name="twitter:image" content="https://4u.ia.br/app/nugov/assets/img/app-logo-256.png">
+
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
@@ -57,8 +70,8 @@
               <span class="material-symbols-outlined" style="font-size: 16px;">install_mobile</span>
               Instalar App
             </button>
-            <button class="btn-icon-header" type="button" onclick="openModal('modal-nubot')" title="Conversar com o NuBot">
-              <span class="material-symbols-outlined" style="font-size: 20px;">smart_toy</span>
+            <button class="btn-icon-header btn-share-header" id="btn-header-share" type="button" title="Compartilhar o NuGov">
+              <span class="material-symbols-outlined" style="font-size: 20px;">share</span>
             </button>
           </div>
         </div>
@@ -205,11 +218,11 @@
         </div>
         <span>Calculadora</span>
       </div>
-      <div class="action-card-btn" id="action-nubot">
+      <div class="action-card-btn" id="action-share">
         <div class="action-icon-wrap">
-          <span class="material-symbols-outlined">psychology</span>
+          <span class="material-symbols-outlined">share</span>
         </div>
-        <span>NuBot IA</span>
+        <span>Compartilhar</span>
       </div>
     </div>
 
@@ -512,23 +525,72 @@
     </div>
   </div>
 
-  <!-- Modal: NuBot IA -->
-  <div class="modal-overlay" id="modal-nubot">
-    <div class="modal-container" style="display: flex; flex-direction: column; height: 500px;">
+  <!-- Modal: Central de Compartilhamento da República -->
+  <div class="modal-overlay" id="modal-share">
+    <div class="modal-container">
       <div class="modal-header">
-        <h2><span>🤖</span> NuBot Presidencial</h2>
+        <h2><span>🚀</span> Compartilhar o NuGov</h2>
         <button class="btn-close-modal" type="button">×</button>
       </div>
-      <div id="nubot-messages" style="flex: 1; overflow-y: auto; padding: 8px 0; display: flex; flex-direction: column;">
-        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: #e2e8f0; margin-right: 20%;">
-          <strong>🤖 NuBot:</strong><br>
-          Olá, cidadão! Eu sou o assistente de transparência do <strong>NuGov</strong>. Pergunte-me sobre qualquer gasto em padarias, hotéis, combustível ou sobre os mandatos de Lula, Bolsonaro, Temer ou Dilma!
+
+      <!-- Social Preview Card -->
+      <div class="share-preview-card">
+        <div class="share-preview-thumb">
+          <img src="assets/img/app-logo.png" alt="NuGov Logo">
+        </div>
+        <div class="share-preview-info">
+          <h4>NuGov — O Extrato da República</h4>
+          <p>O extrato que o contribuinte paga todo mês. Gastos reais do Cartão Corporativo Presidencial auditados pela CGU.</p>
+          <span class="share-preview-domain">4u.ia.br/app/nugov</span>
         </div>
       </div>
-      <form id="nubot-form" style="display: flex; gap: 8px; margin-top: 10px;">
-        <input type="text" id="nubot-input" class="calc-input" placeholder="Pergunte algo ao NuBot..." style="flex: 1;">
-        <button type="submit" style="background: var(--nu-purple); border: none; color: #fff; padding: 0 16px; border-radius: 8px; cursor: pointer; font-weight: 700;">Enviar</button>
-      </form>
+
+      <!-- Quick Action Share Buttons -->
+      <div class="share-buttons-grid">
+        <a href="#" class="btn-share-channel btn-share-wa" id="btn-share-wa-direct" target="_blank" rel="noopener noreferrer">
+          <span class="share-icon">💬</span>
+          <div class="share-btn-text">
+            <strong>WhatsApp</strong>
+            <small>Mandar no grupo ou amigos</small>
+          </div>
+        </a>
+        <a href="#" class="btn-share-channel btn-share-tg" id="btn-share-tg-direct" target="_blank" rel="noopener noreferrer">
+          <span class="share-icon">✈️</span>
+          <div class="share-btn-text">
+            <strong>Telegram</strong>
+            <small>Compartilhar em canais</small>
+          </div>
+        </a>
+        <a href="#" class="btn-share-channel btn-share-x-dark" id="btn-share-x-direct" target="_blank" rel="noopener noreferrer">
+          <span class="share-icon">✖</span>
+          <div class="share-btn-text">
+            <strong>Postar no X</strong>
+            <small>Divulgar para seguidores</small>
+          </div>
+        </a>
+        <button type="button" class="btn-share-channel btn-share-copy" id="btn-share-copy-link">
+          <span class="share-icon">📋</span>
+          <div class="share-btn-text">
+            <strong id="copy-btn-text">Copiar Link</strong>
+            <small>https://4u.ia.br/app/nugov/</small>
+          </div>
+        </button>
+      </div>
+
+      <!-- QR Code & Story Card Section -->
+      <div class="share-extras-card">
+        <div class="share-qr-wrap">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2F4u.ia.br%2Fapp%2Fnugov%2F&color=820ad1&bgcolor=ffffff" alt="QR Code NuGov" class="share-qr-img">
+          <span>Aponte a câmera para abrir no celular</span>
+        </div>
+        <div class="share-story-wrap">
+          <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px;">📸 Divulgue nos Stories / Status:</div>
+          <p class="share-story-desc">Baixe uma imagem 9:16 oficial de alta resolução com o resumo do cartão:</p>
+          <button type="button" class="btn-story-card" id="btn-share-gen-story" style="margin-top: 0; width: 100%;">
+            <span>📸</span> Baixar Card Oficial para Stories
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

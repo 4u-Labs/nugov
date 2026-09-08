@@ -557,7 +557,11 @@ function setupEventListeners() {
     updateServicesCalculator();
     openModal('modal-calculator');
   });
-  document.getElementById('action-nubot')?.addEventListener('click', () => openModal('modal-nubot'));
+  document.getElementById('action-share')?.addEventListener('click', handleShareApp);
+  document.getElementById('btn-header-share')?.addEventListener('click', handleShareApp);
+
+  // Setup Share Hub direct buttons
+  setupShareHub();
 
   // Duel Selectors
   document.getElementById('duel-select-a')?.addEventListener('change', renderDuel);
@@ -598,12 +602,6 @@ function setupEventListeners() {
   const salaryInput = document.getElementById('calc-salary-input');
   if (salaryInput) {
     salaryInput.addEventListener('input', updateCitizenCalculator);
-  }
-
-  // NuBot Form
-  const nubotForm = document.getElementById('nubot-form');
-  if (nubotForm) {
-    nubotForm.addEventListener('submit', handleNuBotChat);
   }
 }
 
@@ -1588,52 +1586,292 @@ function updateCitizenCalculator() {
   `;
 }
 
-function handleNuBotChat(e) {
-  e.preventDefault();
-  const input = document.getElementById('nubot-input');
-  const chatBox = document.getElementById('nubot-messages');
-  if (!input || !chatBox || !input.value.trim()) return;
+// =========================================================
+// CENTRAL DE COMPARTILHAMENTO DA REPÚBLICA & SOCIAL SHARING
+// =========================================================
 
-  const userQuery = input.value.trim();
-  input.value = '';
+function handleShareApp() {
+  const shareTitle = 'NuGov — O Extrato da República';
+  const shareText = '🚨 Olha isso! O extrato interativo do Cartão Corporativo Presidencial (2003–2026). Gastos reais auditados pela CGU em formato fintech:';
+  const shareUrl = 'https://4u.ia.br/app/nugov/';
 
-  const userMsg = document.createElement('div');
-  userMsg.style.cssText = 'background: rgba(130, 10, 209, 0.3); border: 1px solid var(--nu-purple); padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: #fff; text-align: right; margin-left: 20%;';
-  userMsg.textContent = userQuery;
-  chatBox.appendChild(userMsg);
-
-  const q = userQuery.toLowerCase();
-  let botReply = 'Consultei a base oficial de dados públicos. ';
-
-  if (q.includes('padaria') || q.includes('pão') || q.includes('lanche')) {
-    botReply += 'O gasto mais emblemático em padarias foi de R$ 9.540,00 na Panificadora Princesa (SP) em 2021 (Governo Bolsonaro) para kits de lanches, além de compras recorrentes na Panificadora Pão Dourado em Brasília durante os mandatos de Lula.';
-  } else if (q.includes('hotel') || q.includes('hospedagem') || q.includes('viagem')) {
-    botReply += 'O maior registro individual em hotelaria foi no Copacabana Palace (R$ 94.300,00 em 2007) e no Windsor Marapendi (R$ 91.400,00 no G20 em 2024), além de diárias no Casa Grande Resort no Guarujá (R$ 78.920,50 em 2020).';
-  } else if (q.includes('combustivel') || q.includes('gasolina') || q.includes('posto')) {
-    botReply += 'O maior abastecimento simultâneo em posto de combustíveis foi de R$ 33.150,00 no Auto Posto Maracanã (RJ) em maio de 2021 para comboios de segurança e batedores, além de frequentes abastecimentos pela Shell e Petrobras.';
-  } else if (q.includes('duelo') || q.includes('comparar')) {
-    botReply += 'Você pode clicar no botão "Duelo" na barra de ações rápidas para comparar qualquer par de presidentes lado a lado em valores nominais e corrigidos pelo IPCA!';
-  } else if (q.includes('quiz')) {
-    botReply += 'Teste seus conhecimentos no botão "Quiz" na barra superior para adivinhar gastos curiosos e desafiar seus amigos no WhatsApp!';
-  } else if (q.includes('lula')) {
-    botReply += 'Nos mandatos 1 e 2 (2003–2010), Lula acumulou R$ 59 milhões nominais (R$ 168 milhões corrigidos pelo IPCA). No mandato 3 (2023–2026), soma cerca de R$ 21,7 milhões nominais registrados no Portal da Transparência.';
-  } else if (q.includes('bolsonaro')) {
-    botReply += 'No mandato de Jair Bolsonaro (2019–2022), foram gastos R$ 27,6 milhões nominais (R$ 34,5 milhões corrigidos pelo IPCA), com destaque para despesas em padarias em SP, postos de combustíveis e hotéis no litoral paulista e catarinense.';
-  } else if (q.includes('dilma')) {
-    botReply += 'No mandato de Dilma Rousseff (2011–2016), foram gastos R$ 24,5 milhões nominais (R$ 47,9 milhões corrigidos pelo IPCA), com destaque para eventos internacionais como a Rio+20 e a Copa do Mundo 2014.';
-  } else if (q.includes('temer')) {
-    botReply += 'No mandato de Michel Temer (2016–2018), foram gastos R$ 9,8 milhões nominais (R$ 15,2 milhões corrigidos pelo IPCA), com média de R$ 351 mil nominais por mês.';
+  if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+    navigator.share({
+      title: shareTitle,
+      text: shareText,
+      url: shareUrl
+    }).catch((err) => {
+      if (err.name !== 'AbortError') {
+        openModal('modal-share');
+      }
+    });
   } else {
-    botReply += 'Você pode filtrar qualquer mandato pelos botões superiores, selecionar seu Estado (UF), pesquisar estabelecimentos ou alternar entre valores nominais e corrigidos pelo IPCA!';
+    openModal('modal-share');
+  }
+}
+
+function setupShareHub() {
+  const shareUrl = 'https://4u.ia.br/app/nugov/';
+  const waMsg = encodeURIComponent(
+    `🚨 Olha isso! O Extrato do Cartão Corporativo Presidencial (2003–2026)\n\n` +
+    `💳 Descubra os gastos reais com hotéis de luxo, padarias e frotas dos governos Lula, Bolsonaro, Temer e Dilma em formato de app fintech.\n\n` +
+    `🏛️ 100% auditado pela CGU e com dados da Lei de Acesso à Informação.\n\n` +
+    `👉 Acesse agora: ${shareUrl}`
+  );
+  const tgMsg = encodeURIComponent(`🚨 NuGov: O Extrato do Cartão Corporativo Presidencial (2003–2026). Confira todos os gastos auditados pela CGU:`);
+  const xMsg = encodeURIComponent(`🚨 NuGov: O Extrato do Cartão Corporativo Presidencial (2003–2026). Gastos reais com hotéis, padarias e viagens auditados pela CGU: ${shareUrl}`);
+
+  const btnWa = document.getElementById('btn-share-wa-direct');
+  const btnTg = document.getElementById('btn-share-tg-direct');
+  const btnX = document.getElementById('btn-share-x-direct');
+  const btnCopy = document.getElementById('btn-share-copy-link');
+  const btnGenStory = document.getElementById('btn-share-gen-story');
+
+  if (btnWa) btnWa.href = `https://api.whatsapp.com/send?text=${waMsg}`;
+  if (btnTg) btnTg.href = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${tgMsg}`;
+  if (btnX) btnX.href = `https://twitter.com/intent/tweet?text=${xMsg}`;
+
+  if (btnCopy) {
+    btnCopy.addEventListener('click', () => {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        const copyText = document.getElementById('copy-btn-text');
+        if (copyText) {
+          copyText.textContent = '✓ Link Copiado com Sucesso!';
+          setTimeout(() => {
+            copyText.textContent = 'Copiar Link';
+          }, 3000);
+        }
+      }).catch(() => {
+        prompt('Copie o link abaixo:', shareUrl);
+      });
+    });
   }
 
-  setTimeout(() => {
-    const botMsg = document.createElement('div');
-    botMsg.style.cssText = 'background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: #e2e8f0; margin-right: 20%;';
-    botMsg.innerHTML = `<strong>🤖 NuBot Presidencial:</strong><br>${botReply}`;
-    chatBox.appendChild(botMsg);
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }, 400);
+  if (btnGenStory) {
+    btnGenStory.addEventListener('click', generateAppGeneralStoryCard);
+  }
+}
+
+// 9:16 General App Story Card Generator (NuGov República)
+function generateAppGeneralStoryCard() {
+  const stats = getMandateStats(currentMandate);
+  const isIpca = currentCurrencyMode === 'ipca';
+  const totalVal = isIpca ? stats.ipca : stats.nominal;
+  const mandateName = currentMandate === 'all' ? 'Todos os Mandatos (2003–2026)' : stats.name;
+
+  const logoImg = new Image();
+  logoImg.crossOrigin = 'anonymous';
+  logoImg.src = 'assets/img/app-logo-256.png';
+
+  const chipImg = new Image();
+  chipImg.crossOrigin = 'anonymous';
+  chipImg.src = 'assets/img/chip.png';
+
+  const render = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080;
+    canvas.height = 1920;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Background Gradient - Rich Ultraviolet Depth
+    const grad = ctx.createLinearGradient(0, 0, 0, 1920);
+    grad.addColorStop(0, '#0c0717');
+    grad.addColorStop(0.25, '#1e0836');
+    grad.addColorStop(0.65, '#140524');
+    grad.addColorStop(1, '#080312');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1080, 1920);
+
+    // Glowing Ambient Orbs
+    ctx.save();
+    ctx.fillStyle = 'rgba(147, 51, 234, 0.45)';
+    ctx.filter = 'blur(100px)';
+    ctx.beginPath();
+    ctx.arc(300, 450, 320, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = 'rgba(56, 189, 248, 0.25)';
+    ctx.beginPath();
+    ctx.arc(800, 1300, 320, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    // Outer Border
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(40, 40, 1000, 1840);
+
+    // Top Logo & Header
+    if (logoImg.complete && logoImg.naturalWidth > 0) {
+      ctx.drawImage(logoImg, 90, 110, 84, 84);
+    }
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 50px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('NuGov REPÚBLICA', 195, 155);
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = '500 28px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('O extrato que o contribuinte paga todo mês', 195, 195);
+
+    // Top Callout
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(90, 250, 900, 84, 20);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#fde047';
+    ctx.font = 'bold 34px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🚨 FATURA OFICIAL DO CARTÃO CORPORATIVO', 540, 305);
+
+    // Main Card Box (República Black)
+    const cardGrad = ctx.createLinearGradient(90, 370, 990, 1220);
+    cardGrad.addColorStop(0, '#1c1033');
+    cardGrad.addColorStop(0.5, '#120824');
+    cardGrad.addColorStop(1, '#0b0416');
+    ctx.fillStyle = cardGrad;
+    ctx.strokeStyle = 'rgba(192, 132, 252, 0.7)';
+    ctx.lineWidth = 3.5;
+    ctx.beginPath();
+    ctx.roundRect(90, 370, 900, 850, 36);
+    ctx.fill();
+    ctx.stroke();
+
+    // Draw Real EMV Chip
+    if (chipImg.complete && chipImg.naturalWidth > 0) {
+      ctx.drawImage(chipImg, 150, 430, 125, 100);
+    }
+
+    // Badge: República Black
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.18)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(570, 415, 360, 48, 12);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 22px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('REPÚBLICA BLACK', 750, 447);
+
+    // Limit badge: Limite Cartão: Ilimitado ∞
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+    ctx.strokeStyle = 'rgba(253, 224, 71, 0.5)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.roundRect(570, 473, 360, 44, 10);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#fde047';
+    ctx.font = 'bold 19px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('LIMITE CARTÃO: ILIMITADO ∞', 750, 502);
+
+    // Big Total Amount Display
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('FATURA ACUMULADA NO CARTÃO:', 150, 610);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '900 84px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(formatCurrency(totalVal), 150, 715);
+
+    // Mode Tag
+    ctx.fillStyle = isIpca ? '#38bdf8' : '#cbd5e1';
+    ctx.font = 'bold 34px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(isIpca ? '📈 Corrigido pelo IPCA (Preços de 2026)' : '💵 Valor Histórico Nominal Registrado', 150, 780);
+
+    // Divider
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(150, 830);
+    ctx.lineTo(930, 830);
+    ctx.stroke();
+
+    // Mandate & Holder Details
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 44px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(stats.card_holder, 150, 900);
+
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = '500 32px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(`🏛️ Governo: ${mandateName}`, 150, 960);
+    ctx.fillText(`📊 Duração: ${stats.months} meses   •   Média: ${formatCurrency(isIpca ? stats.monthlyIpca : stats.monthlyNom)}/mês`, 150, 1020);
+
+    ctx.fillStyle = '#fde047';
+    ctx.font = 'bold 32px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText(`💳 Cartão CPGF: •••• •••• •••• 2026  🇧🇷`, 150, 1110);
+
+    // Call to Action Box
+    ctx.fillStyle = 'rgba(15, 10, 32, 0.95)';
+    ctx.strokeStyle = 'rgba(139, 16, 230, 0.75)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.roundRect(90, 1260, 900, 240, 28);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 32px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('🔍 VEJA O EXTRATO COMPLETO DE CADA GASTO:', 140, 1330);
+
+    ctx.fillStyle = '#fde047';
+    ctx.font = '900 52px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('Hotéis VIP • Padarias • Frotas • Duelos', 140, 1405);
+
+    ctx.fillStyle = '#a855f7';
+    ctx.font = 'bold 36px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('Acesse grátis: https://4u.ia.br/app/nugov/', 140, 1465);
+
+    // Footer Verification Badge
+    ctx.fillStyle = 'rgba(16, 185, 129, 0.22)';
+    ctx.strokeStyle = 'rgba(52, 211, 153, 0.65)';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.roundRect(90, 1535, 900, 145, 20);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#34d399';
+    ctx.font = 'bold 30px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('🛡️ DADOS PÚBLICOS AUDITADOS — CGU & LAI', 140, 1590);
+
+    ctx.fillStyle = '#e2e8f0';
+    ctx.font = '500 24px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillText('Transparência pública e controle social independente.', 140, 1635);
+
+    // Download Link
+    const dataUrl = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.download = `NuGov_Republica_Extrato_${currentMandate}.png`;
+    link.href = dataUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  let loaded = 0;
+  const checkDone = () => {
+    loaded++;
+    if (loaded >= 2) render();
+  };
+
+  logoImg.onload = checkDone;
+  logoImg.onerror = checkDone;
+  chipImg.onload = checkDone;
+  chipImg.onerror = checkDone;
+
+  if (logoImg.complete && chipImg.complete) {
+    render();
+  }
 }
 
 function setupImpostometro() {
@@ -1691,3 +1929,5 @@ window.handleQuizAnswer = handleQuizAnswer;
 window.nextQuizQuestion = nextQuizQuestion;
 window.initQuiz = initQuiz;
 window.openModal = openModal;
+window.handleShareApp = handleShareApp;
+window.generateAppGeneralStoryCard = generateAppGeneralStoryCard;

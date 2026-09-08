@@ -1,0 +1,109 @@
+{
+  "totals_by_mandate": {
+    "all": {
+      "name": "Todos os Mandatos (2003–2026)",
+      "total_spent": 142780912.45,
+      "total_transactions": 284190,
+      "card_holder": "Presidência da República do Brasil",
+      "card_number": "•••• •••• •••• 2026",
+      "card_badge": "REPÚBLICA BLACK",
+      "flag": "🇧🇷"
+    },
+    "lula1_2": {
+      "name": "Lula (2003–2010)",
+      "total_spent": 59012440.10,
+      "total_transactions": 115200,
+      "card_holder": "L. I. LULA DA SILVA",
+      "card_number": "•••• •••• •••• 2010",
+      "card_badge": "PLANALTO TITANIUM",
+      "flag": "⭐"
+    },
+    "dilma": {
+      "name": "Dilma Rousseff (2011–2016)",
+      "total_spent": 24590110.80,
+      "total_transactions": 54100,
+      "card_holder": "DILMA V. ROUSSEFF",
+      "card_number": "•••• •••• •••• 2016",
+      "card_badge": "ALVORADA INFINITE",
+      "flag": "⭐"
+    },
+    "temer": {
+      "name": "Michel Temer (2016–2018)",
+      "total_spent": 9840220.30,
+      "total_transactions": 21300,
+      "card_holder": "MICHEL M. E. TEMER",
+      "card_number": "•••• •••• •••• 2018",
+      "card_badge": "JABURU PLATINUM",
+      "flag": "⚖️"
+    },
+    "bolsonaro": {
+      "name": "Jair Bolsonaro (2019–2022)",
+      "total_spent": 27620140.25,
+      "total_transactions": 61400,
+      "card_holder": "JAIR M. BOLSONARO",
+      "card_number": "•••• •••• •••• 2022",
+      "card_badge": "PATRIOTA ULTRA",
+      "flag": "🦅"
+    },
+    "lula3": {
+      "name": "Lula (2023–2026)",
+      "total_spent": 21718001.00,
+      "total_transactions": 32190,
+      "card_holder": "L. I. LULA DA SILVA",
+      "card_number": "•••• •••• •••• 2026",
+      "card_badge": "UNIAO & RECONSTRUCAO",
+      "flag": "🌱"
+    }
+  },
+  "top_curiosities": [
+    {
+      "title": "A Padaria Recordista 🥖",
+      "amount": "R$ 9.540,00",
+      "date": "15/08/2021",
+      "mandate": "Jair Bolsonaro",
+      "description": "Compra única de kits de lanches e pães artesanais na Panificadora Princesa em SP para apoio da comitiva."
+    },
+    {
+      "title": "Hospedagem Histórica no Copacabana Palace 🏨",
+      "amount": "R$ 94.300,00",
+      "date": "12/06/2007",
+      "mandate": "Lula",
+      "description": "Reserva de suítes de luxo e salas para conferência preparatória dos Jogos Pan-Americanos Rio 2007."
+    },
+    {
+      "title": "Abastecimento Simultâneo de Frota ⛽",
+      "amount": "R$ 33.150,00",
+      "date": "23/05/2021",
+      "mandate": "Jair Bolsonaro",
+      "description": "Abastecimento em posto de combustíveis no Rio de Janeiro para dezenas de veículos e batedores."
+    },
+    {
+      "title": "Gabinete Avançado Copa do Mundo 2014 ⚽",
+      "amount": "R$ 67.800,00",
+      "date": "10/06/2014",
+      "mandate": "Dilma Rousseff",
+      "description": "Diárias de hotel no Hotel Transamérica SP para a equipe de cerimonial e segurança da abertura da Copa."
+    },
+    {
+      "title": "Supermercado em Brasília 🛒",
+      "amount": "R$ 18.450,30",
+      "date": "20/09/2008",
+      "mandate": "Lula",
+      "description": "Estocagem de gêneros alimentícios e insumos no Pão de Açúcar para o buffet do Palácio do Planalto."
+    },
+    {
+      "title": "Suítes Reservadas no Royal Tulip 🏛️",
+      "amount": "R$ 51.200,00",
+      "date": "04/08/2017",
+      "mandate": "Michel Temer",
+      "description": "Salas de articulação política e hospedagem institucional em Brasília."
+    }
+  ],
+  "categories_breakdown": [
+    { "name": "Hospedagem & Hotéis", "percentage": 42.5, "icon": "hotel", "color": "#8b5cf6" },
+    { "name": "Alimentação & Padarias", "percentage": 28.3, "icon": "bakery_dining", "color": "#ec4899" },
+    { "name": "Combustíveis & Frotas", "percentage": 17.2, "icon": "local_gas_station", "color": "#f59e0b" },
+    { "name": "Mercados & Suprimentos", "percentage": 7.8, "icon": "shopping_cart", "color": "#10b981" },
+    { "name": "Segurança & Apoio Tático", "percentage": 4.2, "icon": "security", "color": "#3b82f6" }
+  ]
+}
